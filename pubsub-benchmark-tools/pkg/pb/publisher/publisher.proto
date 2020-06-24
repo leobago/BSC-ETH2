@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package pb;
+
+option java_multiple_files = true;
+option java_package = "io.grpc.pubsub.benchmark";
+option java_outer_classname = "PubsubBenchmark";
+
+import "google/protobuf/empty.proto";
+
+message Message {
+  string id = 1;
+  int32 sequence = 2;
+  bytes data = 3;
+}
+
+message PublishReply {
+  string msgId = 1;
+  bool success = 2;
+}
+
+message CloseAllPeerConnectionsReply {
+  bool success = 1;
+}
+
+message ShutdownReply {
+  bool success = 1;
+}
+
+message PeersList {
+  repeated string peers = 1;
+}
+
+message ClosePeerConnectionsReply {
+  bool success = 1;
+}
+
+message OpenPeerConnectionReply {
+  bool success = 1;
+  string peer = 2;
+}
+
+message OpenPeersConnectionsReplies {
+  repeated OpenPeerConnectionReply PeerConnections = 1;
+}
+
+message IDReply {
+  string ID = 1;
+}
+
+message ListenAddressesReply {
+  repeated string Addresses = 1;
+}
+
+// The publisher service definition.
+service Publisher {
+  // Publishes a message on the pubsub channel
+  rpc PublishMessage(Message) returns (PublishReply) {}
+  // Closes all connections
+  rpc CloseAllPeerConnections(google.protobuf.Empty) returns (CloseAllPeerConnectionsReply) {}
+  // Closes connections to listed peers
+  rpc ClosePeerConnections(PeersList) returns (ClosePeerConnectionsReply) {}
+  // Opens connections to listed peers
+  rpc OpenPeersConnections(PeersList) returns (OpenPeersConnectionsReplies) {}
+  // Lists the host's connected peers
+  rpc ListConnectedPeers(google.protobuf.Empty) returns (PeersList) {}
+  // Shuts the host down
+  rpc Shutdown(google.protobuf.Empty) returns (ShutdownReply) {}
+  // ID returns the host's id
+  rpc ID(google.protobuf.Empty) returns (IDReply) {}
+  // ListenAddresses returns the host's listen addresses  
+  rpc ListenAddresses(google.protobuf.Empty) returns (ListenAddressesReply) {}
+}
