@@ -87,8 +87,11 @@ func main() {
 					}
 
 					// get the data to show it properly
-					ctime := float64(codetime) / float64(time.Microsecond)
-					dctime := float64(decodetime) / float64(time.Microsecond)
+					ctime := float64(codetime / time.Nanosecond)
+					dctime := float64(decodetime / time.Nanosecond)
+
+					ctime = ctime / 1000.0
+					dctime = dctime / 1000.0
 
 					compressRatio := (float64(len(byteValue)) / float64(len(compressmsg)))
 					compressSpeed := (float64(len(byteValue)) / ctime)
