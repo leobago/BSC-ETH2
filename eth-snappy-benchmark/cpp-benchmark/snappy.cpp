@@ -8,7 +8,7 @@
 #include <dirent.h>
 #include <jsoncpp/json/json.h>
 #include <stdio.h>
-#include "../../../google-snappy/snappy/snappy.h"
+#include "snappy/snappy.h"
 
 using namespace std;
 
@@ -38,10 +38,12 @@ int main(int argc, char* argv[]) {
     long sizeBlockCompress = 0;
 
     if (argc < 2){
-        folderName = "./data";
+        folderName = "./eth2-data";
     }else{
         folderName = argv[1];
     }
+
+    cout << "Folder name: "<< folderName << endl;
 
     // Iteration through the files of the data folder where the .json for the tests are located
     dp = opendir(folderName);

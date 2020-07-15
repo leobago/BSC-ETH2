@@ -13,11 +13,13 @@ import (
 )
 
 func main() {
-	var dataPath = flag.String("path", "/data", "Path of the data for the snappy compression test")
+	var dataPath = flag.String("path", "/eth2-data", "Path of the data for the snappy compression test")
 	var suffix = flag.String("suffix", ".json", "Path of the data for the snappy compression test")
 	flag.Parse()
 
 	var files []string
+
+	fmt.Println("Path used for the compression test:", *dataPath)
 
 	// Get current working directory
 	wd, err := os.Getwd()
