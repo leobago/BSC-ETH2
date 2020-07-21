@@ -12,12 +12,16 @@ import (
 	"github.com/golang/snappy"
 )
 
+var numberIterationsBlock int = 10
+
 func main() {
 	var dataPath = flag.String("path", "/eth2-data", "Path of the data for the snappy compression test")
 	var suffix = flag.String("suffix", ".json", "Path of the data for the snappy compression test")
 	flag.Parse()
 
 	var files []string
+	var iterationCounter int = 0
+	var iterationNumber int = 0
 
 	fmt.Println("Path used for the compression test:", *dataPath)
 
@@ -52,8 +56,11 @@ func main() {
 		// filter the files that finishes in .json
 		if strings.HasSuffix(file, *suffix) {
 
+			// for the first compression test, execute an extra time to load the snappy code to cache
+			iterationNumber = numberIterationsBlock + 1
+
 			// Run the compression test 10 times for each block
-			for i := 0; i < 10; i++ {
+			for i := 0; i < iterationNumber; i++ {
 
 				// Open our jsonFile
 				jsonFile, err := os.Open(file)
@@ -103,16 +110,23 @@ func main() {
 						fmt.Printf("Encoding time (µs); Decoding time (µs); Compression ratio ; Compression Speed (MB/s)\n")
 					}
 
-					fmt.Printf("%.3f;%.3f;%.3f;%.3f\n", ctime, dctime, compressRatio, compressSpeed)
+					if iterationCounter >= 1 {
 
-					avgEncodeSpeed = append(avgEncodeSpeed, ctime)
-					avgDecodeSpeed = append(avgDecodeSpeed, dctime)
-					avgCompresRatio = append(avgCompresRatio, compressRatio)
-					avgCompresSpeed = append(avgCompresSpeed, compressSpeed)
+						fmt.Printf("%.3f;%.3f;%.3f;%.3f\n", ctime, dctime, compressRatio, compressSpeed)
+
+						avgEncodeSpeed = append(avgEncodeSpeed, ctime)
+						avgDecodeSpeed = append(avgDecodeSpeed, dctime)
+						avgCompresRatio = append(avgCompresRatio, compressRatio)
+						avgCompresSpeed = append(avgCompresSpeed, compressSpeed)
+					}
 
 					defer jsonFile.Close()
+
+					// Increase the number of iterations done so far
+					iterationCounter = iterationCounter + 1
 				}
 			}
+
 			var avgRatio float64 = 0
 			var avgSpeed float64 = 0
 			var avgEncode float64 = 0
@@ -135,6 +149,9 @@ func main() {
 			fmt.Printf("%.3f;%.3f;%.3f;%.3f:MAXIMUM\n", EncodeMax, DecodeMax, ratioMax, speedMax)
 
 			fmt.Printf("\n")
+
+			// Reset the iteration times to load in cache the snappy code
+			iterationCounter = 0
 
 		}
 	}
