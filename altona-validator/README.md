@@ -17,7 +17,8 @@ Link to our [BSC-ETH2 Validator](https://altona.beaconcha.in/validator/a2b60b956
 As it is shown on the [Lighthouse website](https://lighthouse-book.sigmaprime.io/become-a-validator.html) there are two ways of running a lighthouse validator:
 - [Dockers](https://lighthouse-book.sigmaprime.io/become-a-validator-docker.html)
 - [Buildig from source](https://lighthouse-book.sigmaprime.io/become-a-validator-source.html)
-In our case, we decided to install and configure the Raspberry pi following [this guide](https://www.coincashew.com/coins/overview-eth/guide-how-to-stake-on-eth-2.0-altona-testnet-with-lighthouse-on-ubuntu).
+
+In our case, we decided to run the validator from source. We installed and configured the client in the Raspberry pi following [this guide](https://www.coincashew.com/coins/overview-eth/guide-how-to-stake-on-eth-2.0-altona-testnet-with-lighthouse-on-ubuntu).
 
 For the step 12th "Send the validator deposit" you will need to have at least 32ETH from the Goerli testnet (non real money. Please be sure you DON'T USE real ETH) on your Goerli Metamask wallet. In case you don't have the 32ETH you can easily get them from the community asking for them on the [Lighthouse Discord](https://discord.com/invite/cyAszAh) or on the [Goerli Testnet Gitter](https://gitter.im/goerli/testnet). For that you will need to give them your wallet address. 
 
