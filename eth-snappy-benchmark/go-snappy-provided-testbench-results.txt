@@ -1,0 +1,24 @@
+Rsults of the test-benchmark provided by the maintainers of the https://github.com/golang/snappy repository (v0.0.1).
+We run the test-benchmark on a Intel(R) Core(TM) i5-6600K CPU @ 3.50GHz, same machine as the cpp and go benchmarks. 
+
+"go test -test.bench=."
+
+goos: linux
+goarch: amd64
+pkg: github.com/golang/snappy
+BenchmarkWordsDecode1e1-4   	66121002	        18.0 ns/op	 556.35 MB/s
+BenchmarkWordsDecode1e2-4   	16248724	        75.0 ns/op	1333.44 MB/s
+BenchmarkWordsDecode1e3-4   	 1649246	       718 ns/op	1391.85 MB/s
+BenchmarkWordsDecode1e4-4   	  161359	      7038 ns/op	1420.85 MB/s
+BenchmarkWordsDecode1e5-4   	    7815	    145121 ns/op	 689.08 MB/s
+BenchmarkWordsDecode1e6-4   	     934	   1284579 ns/op	 778.46 MB/s
+BenchmarkWordsEncode1e1-4   	78879666	        14.6 ns/op	 683.42 MB/s
+BenchmarkWordsEncode1e2-4   	 7570958	       160 ns/op	 626.29 MB/s
+BenchmarkWordsEncode1e3-4   	  716301	      1473 ns/op	 678.98 MB/s
+BenchmarkWordsEncode1e4-4   	   58774	     20063 ns/op	 498.44 MB/s
+BenchmarkWordsEncode1e5-4   	    4494	    265899 ns/op	 376.08 MB/s
+BenchmarkWordsEncode1e6-4   	     522	   2277305 ns/op	 439.12 MB/s
+BenchmarkRandomEncode-4     	   20308	     58940 ns/op	17790.45 MB/s
+BenchmarkExtendMatch-4      	  183582	      6242 ns/op
+PASS
+ok  	github.com/golang/snappy	19.002s
