@@ -36,7 +36,7 @@ We are facing some unexpected desconnection of the beacon node every 1-2 days. T
 [Link](https://www.reddit.com/r/ethstaker/comments/g9dbug/what_causes_missed_attestations/) to the reddit discussion where the possible causes are explained.
 
 #### Edit validator name
-1. Go to your Validator overview page on beaconcha.io ([Our page](https://altona.beaconcha.in/validator/4384#overview) as example).
+1. Go to your Validator overview page on beaconcha.in ([Our page](https://altona.beaconcha.in/validator/4384#overview) as example).
 2. Click on the NAME field.
 3. Type custom name.
 4. Go to [MyCrypto](https://www.mycrypto.com/sign-and-verify-message/sign). On the "Sign Message" tab, select Web3 and allow Metamask extension to connect MyCrypto.
