@@ -15,9 +15,13 @@ Rumor is an interactive shell that lets you generate custom p2p hosts in an Eth2
 #### Installing rumor 
 
 To install rumor:
+
 ´~$ git clone git@github.com:protolambda/rumor.git´
+
 ´~$ cd rumor´
+
 ´$ go get ./...´
+
 ´$ go build -o rumor´
 
 #### Run rumor
