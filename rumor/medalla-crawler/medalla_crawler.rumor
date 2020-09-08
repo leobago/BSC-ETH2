@@ -1,0 +1,85 @@
+# File that initializes the medalla crawler
+# To launch the file, just make sure you launch the rumor shell/file 
+# on the folder where the following files are located:
+# medalla-crawler.rumor
+# init-host-rumor
+# medalla-dev5.rumor
+#
+# Incomming files/functionalities (Not currently working)
+# medalla_gossip.rumor
+
+# Get our public ip and setup the port for our host
+external_ip="$(curl -s v4.ident.me)"
+p2p_port=9020
+
+fork_digest="0xe7a75d5a"
+
+# Generate the host under mike actor
+mike: me
+
+# Initialize the host by using the init-host.rumor module
+mike: include init_host.rumor
+
+# Initialize the peer_discovery with the medalla bootnodes
+mike: include medalla_dv5.rumor
+
+# Initialize the peerstatus and metadata to fake a medalla node
+mike: include peer_setup.rumor
+echo "Crawler running"
+
+sleep 20s
+
+
+
+# Check after 10 secs how many peers did we get (should be between 70-80)
+# The auto-peering option ofered by the libp2p library
+# looks currently disabled (currlently working on it)
+# So the peers get automatically added to the peerstore, but not connected to the host
+
+# Finish the dv5
+# Ideally, dv5 and the host should keep discovering peers and connecting to them automatically
+# For our little crawler, 50-80 peers is enough
+mike: _dv5_run cancel
+
+sleep 1s
+
+# try to connect to the gossip topics for eth2 (right now it's just a test with /eth/fork_digest/beacon_block/ssz_snappy)
+# Currently not working for some reason
+mike: include medalla_gossip.rumor
+
+echo "peers on the peerstore"
+mike: peer list all --details
+
+# To manualy connect the peers on the peerstore, at least until the bug is fixed, 
+# we can simply iterate through the peers on the peerstore
+
+for peer in ${!__peers[@]}
+do
+    echo "peer id: $peer"
+    _peer_details mike: peer info "$peer"
+    mike: peer connect "$_peer_details_addrs"
+done
+
+echo
+
+echo "peers on the peerstore"
+mike: peer list all --details
+# Log the crawled peers into a file
+grab __peers > peer_list.txt
+
+echo "peers connected to:"
+mike: peer list connected
+
+sleep 1s
+
+mike: gossip list-peers "/eth2/$fork_digest/beacon_block/ssz_snappy"
+
+sleep 5s 
+
+echo "Finishing the script"
+
+# Finish routine 
+mike: kill
+
+echo "script finished"
+exit

@@ -1,0 +1,52 @@
+# File to initialize the libp2p node for the medalla testnet monitoring
+# Idealy able to be launched from the medalla-crawler.rumor file
+
+# The script requires an actor established on the rumor shell
+# e.g. `>> alice: me`  before launching this script
+
+# Get our public ip
+external_ip="$(curl -s v4.ident.me)"
+p2p_port=9020
+
+fork_digest="0xe7a75d5a"
+
+# local lighthouse node info
+#TARGET_IP="127.0.0.1"
+#TARGET_PORT=9000
+#TARGET_PEER_ID="16Uiu2HAm1GXHc6V5t2AhMupFykeP5fJerTiLGrtL2wdyTAY78x8M"
+
+# Create a peerstore
+peerstore create crawler
+
+# Generate the ENR name for the host
+enr make \
+  --ip="$external_ip" \
+  --tcp="$p2p_port" \
+  --udp="$p2p_port" \
+  --static-ip="$external_ip" \
+  --fallback-udp="$p2p_port" \
+  --attnets="0xffffffffffffffff" \
+  --fork-digest="$fork_digest" \
+  --next-fork-version="0x00000001" \
+  --next-fork-epoch="0xffffffffffffffff"
+
+# Set the maximum and minimum number of peers and the name as the network will identify us
+host start --lo-peers=200 --hi-peers=300 --peer-grace-period=30s --agent="ETH2-BSC-Crawler"
+# Set all the connections and streams as visible
+host notify all
+# listen on public facing network interface
+host listen --ip="0.0.0.0" --tcp="$p2p_port"
+	
+# Print on the STDOUT the details of our host
+host view
+echo "Our Host addrs: $__addr"
+
+# Serve responses to incoming Status/Metadata/Pongs requests
+peer status serve
+peer metadata serve
+peer metadata pong --update=true --compression=snappy
+peer metadata pong --update=true --compression=none
+
+#peer connect /ip4/$TARGET_IP/tcp/$TARGET_PORT/p2p/$TARGET_PEER_ID
+ 
+

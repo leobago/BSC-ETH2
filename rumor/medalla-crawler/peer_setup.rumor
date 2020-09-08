@@ -1,0 +1,44 @@
+# Set up a fake Medalla status
+
+fork_digest="0xe7a75d5a"
+
+# We zero out attnets here, even though we advertise it in the ENR. We can't really support the attnets without gossip.
+peer metadata set \
+      --attnets="0x0000000000000000" \
+      --seq-number=0
+
+# change status, as if we are at the start of the Medalla chain
+peer status set \
+      --finalized-epoch=0 \
+      --finalized-root="0000000000000000000000000000000000000000000000000000000000000000" \
+      --fork-digest="$fork_digest" \
+      --head-root="0xebe49843e96e538592c9e1976e155e9057c251ed9312eba517afce3ca1a0660c" \
+      --head-slot=0
+
+# Set up malicious endpoints, never actually sync
+rpc blocks-by-range listen --drop --compression=snappy
+rpc blocks-by-root listen --drop --compression=snappy
+rpc goodbye listen --drop --compression=snappy
+
+rpc blocks-by-range listen --drop --compression=none
+rpc blocks-by-root listen --drop --compression=none
+rpc goodbye listen --drop --compression=none
+
+# Setup the behaviour of our host for the incoming requests on status and metadata
+peer status serve
+peer metadata serve
+## Serve pong requests, also update if we get a higher ping than known
+peer metadata pong --update=true --compression=snappy
+peer metadata pong --update=true --compression=none
+
+sleep 1s
+
+echo "Start polling status-metadata from peers"
+# Start polling status of everyone
+# Exchange status with everyone 
+peer status poll --interval=15s  --timeout=3s --compression=snappy
+peer status poll --interval=15s  --timeout=3s --compression=none
+#
+## Ping everyone, and update metadata if they have new data for us
+peer metadata poll --interval=30s  --timeout=10s  --update=true --update-timeout=20s --compression=snappy
+peer metadata poll --interval=30s  --timeout=10s  --update=true --update-timeout=20s --compression=none
