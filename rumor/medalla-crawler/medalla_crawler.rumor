@@ -52,7 +52,6 @@ mike: peer list all --details
 
 # To manualy connect the peers on the peerstore, at least until the bug is fixed, 
 # we can simply iterate through the peers on the peerstore
-
 for peer in ${!__peers[@]}
 do
     echo "peer id: $peer"
@@ -64,7 +63,8 @@ echo
 
 echo "peers on the peerstore"
 mike: peer list all --details
-# Log the crawled peers into a file
+
+# Print the known peers into a file
 grab __peers > peer_list.txt
 
 echo "peers connected to:"
@@ -73,6 +73,9 @@ mike: peer list connected
 sleep 1s
 
 mike: gossip list-peers "/eth2/$fork_digest/beacon_block/ssz_snappy"
+
+
+# --- Comment the section bellow if the crawler wants to be used as a node initializer -----
 
 sleep 5s 
 

@@ -16,14 +16,12 @@ Rumor is an interactive shell that lets you generate custom p2p hosts in an Eth2
 
 To install rumor:
 
-´~$ git clone git@github.com:protolambda/rumor.git´
-
-´~$ cd rumor´
-
-´$ go get ./...´
-
-´$ go build -o rumor´
-
+```
+~$ git clone git@github.com:protolambda/rumor.git
+~$ cd rumor
+$ go get ./...
+$ go build -o rumor
+```
 #### Run rumor
  
 Rumor offers several options to run it:
@@ -44,39 +42,35 @@ This will include commands that are explained on the [documentation](https://not
 In this first example we are going to see the implementation of the “shell + files” by starting a p2p host in different ways.
 
 Generating a host just with the shell (run `$rumor shell` on a terminal)
-
-`$ rumor shell`
-
-`>> host start`
-
-`>> host notify all`
-
-`>> host listen`
-
+```
+$ rumor shell
+>> host start
+>> host notify all
+>> host listen
+```
 Generating a file.rumor that starts the host
 
 Create a `host-start.rumor` file with your favourite code editor and paste the following commands on it:
-
-`host start`
-
-`host notify all`
-
-`host listen`
-
+```
+host start
+host notify all
+host listen
+```
 
 Save the file and open a new `$rumor shell` on a new terminal.
-
-`$ rumor shell`
-
-`>> include host-start.rumor`
+```
+$ rumor shell
+>> include host-start.rumor
+```
 
 You should see that both outputs are the same on both terminals. This feature is very useful to save us time typing the same commands every time.
 
 Note: We recommend you to organize all your rumor scripts in folders, and remember to parse the path to the script from the working directory from where you are launching the rumor shell.  
 e.g. 
 
-`>> include rumor-test/host-start.rumor`
-
+```
+>> include rumor-test/host-start.rumor
+```
 
 #### Actors
 
@@ -85,45 +79,36 @@ So far, we just started a single host on a rumor shell but rumor offers the figu
 Let's make a single example to understand this in a better way.
 
 On a `$ rumor shell` :
-
-`$ rumor shell`
-
-`>> alice: host start`
-
-`>> alice: host notify all`
-
-`>> alice: host listen`
+```
+>> alice: host start
+>> alice: host notify all
+>> alice: host listen
+```
 
 Adding a “string + :” before a command, executes the command after the “ : ” on the actor environment, or generates a new actor with that name if it doesn't exist already.
 
 Rumor offers another alternative to the use of actors, that serves the same purpose as `su` command on the terminal. By typing `<actor name>: me` all the following commands will refer to the specified actor.
 
 On a new `$ rumor shell` :
-
-`$ rumor shell`
-
-`>> alice: me`
-
-`>> host start`
-
-`>> host notify all`
-
-`>> host listen`
+```
+>> alice: me
+>> host start
+>> host notify all
+>> host listen
+```
 
 Check that the output logs have the same format as the previous test. On the logs, the actor name is specified between “[ ]”.
 
 Rumor also allows to run a script on a specified actor.
-
-`$ rumor shell`
-
-`>> alice: include host-start.rumor`
-
-`$ rumor shell`
-
-`>> bob: me`
-
-`>> include host-start.rumor`
-
+```
+$ rumor shell
+>> alice: include host-start.rumor
+```
+```
+$ rumor shell
+>> bob: me
+>> include host-start.rumor
+```
 #### Interaction with the rumor shell
 
 Rumor is an interactive shell that has some *Bash* features. Meaning that we can use the basic shell script statements to generate our rumor scripts (statements, loops, variables, ect...) plus other functionalities that rumor adds (check [How to use it / Commons](https://notes.ethereum.org/@protolambda/rumor-tutorial#Commons) chapter on the official guide).
@@ -139,10 +124,10 @@ For a big overview of the functionality that rumor offers check the [functionali
 Note: If you have any doubt about a specific command or flags that have to be parsed to commands, you can simply type `<comand> --help` on a rumor shell to get a description of the usage and the flags that can be parsed.
 
 e.g. 
-
-`$ rumor shell`
-
-`>> host start --help`
+```
+$ rumor shell
+>> host start --help
+```
 
 Note: To get a deeper knowledge of the parameters or even the functionalities, you can visit the [Eth2 hacker start guide](https://notes.ethereum.org/@protolambda/eth2_start) were all the needed documentation is linked or provided. 
 
