@@ -1,5 +1,5 @@
 # BSC-ETH2 contribution to Rumor
-This file compiles the work or contribution that the BSC-ETH2 team did or aims to do regarding Rumor. This work includes:
+This file compiles the work and contributions that the BSC-ETH2 team did and aims to do on Rumor. This work includes:
 - Found and reported bugs
 - Links to guides and demos
 - Ideas that could be implemented
