@@ -1,4 +1,4 @@
-#TESTS TO RUN
+# TESTS TO RUN
 
 Tests are run with the parameters used in the Gossipsub-v1.1 Evaluation Report made by Protocol Labs.
 The objective of the testing is the replication of the results obtained in the Gossipsub-v1.1 Evaluation Report, as well as extending the scope of those tests, both in magnitude and variety of attack vectors.
@@ -7,50 +7,90 @@ For this reason, here there are some standard parameters used for all the test.
 Depending on the test some of them will need to be changed accordingly to the specific documentation provided in the test.
 Some parameters are not defined yet, and their value is set to “TBD” (To Be Defined).
 
-##Gossipsub-v1.1 Mesh Parameters
+## Gossipsub-v1.1 Mesh Parameters
 
 **Time:**
-TestSetupTime: TBD TestRuntime: TBD WarmupTime : TBD CooldownTime: TBD
-Node Counts:
+TestSetupTime: TBD 
+TestRuntime: TBD
+WarmupTime : TBD 
+CooldownTime: TBD
+
+**Node Counts:**
 N_PUBLISHERS = 100
 N_LURKERS = 900
-N_ATTACKER_NODES = 4000 N_HONEST_PEERS_FOR_CONTAINER = TBD N_ATTACKER_PEERS_FOR_CONTAINER = TBD
+N_ATTACKER_NODES = 4000 
+N_HONEST_PEERS_FOR_CONTAINER = TBD
+N_ATTACKER_PEERS_FOR_CONTAINER = TBD
 
 **Pubsub:**
-HeartBeatInterval = 1s IntitialHeartbeatDelay = TBD SizeOfValidationQueue= TBD SizeOfOutboundRPC_Queue = TBD IntervalToDumpPeerScores= TBD
-OVERLAY_D = 8 OVERLAY_DLO = 6
-OVERLAY_DHI = 12 OVERLAY_DSCORE = 6 OVERLAY_DLAZY = 12
+HeartBeatInterval = 1s 
+IntitialHeartbeatDelay = TBD 
+SizeOfValidationQueue= TBD 
+SizeOfOutboundRPC_Queue = TBD
+IntervalToDumpPeerScores= TBD
+OVERLAY_D = 8 
+OVERLAY_DLO = 6
+OVERLAY_DHI = 12
+OVERLAY_DSCORE = 6 
+OVERLAY_DLAZY = 12
 D_OUT = TBD
 GossipFactor = 0.25
 Heartbeat = 1s OpportunisticGraftHeartbeatTicks = TBD
 
 **Network:**
-MIN_LATENCY = TBD MAX_LATENCY = TBD LATENCY JITTER = 10% BANDWIDTH = 10240 N_DEGREE = 20 N_SYBILS = 4000 ATTACK_DEGREE = 100
+MIN_LATENCY = TBD 
+MAX_LATENCY = TBD 
+LATENCY JITTER = 10% 
+BANDWIDTH = 10240 
+N_DEGREE = 20 
+N_SYBILS = 4000 
+ATTACK_DEGREE = 100
 Honest Behaviour:
-FloodPublishing = Yes JitterHonestConnectDelay = TBD HonestPeerConnectionDelay = TBD
+FloodPublishing = Yes 
+JitterHonestConnectDelay = TBD 
+HonestPeerConnectionDelay = TBD
 Attack Behaviour:
 AttackType = Sybil
-CensorTargetNode = ... (value depends on specific TEST) TargetSingleNode = ... (value depend on specific TEST) AttackPublishersOnly = ... (value depend on specific TEST) JitterForAttackerDelay = TBD
+CensorTargetNode = ... (value depends on specific TEST)
+TargetSingleNode = ... (value depend on specific TEST) 
+AttackPublishersOnly = ... (value depend on specific TEST)
+JitterForAttackerDelay = TBD
 SybilDropProbability = TBD
 SybilAttackDelay = TBD
 RegraftDelay = TBD
-
 RegraftBackoff = TBD SeenCacheDuration = TBD
 
 **PeerScore:**
-GossipThreshold = -4000.0 [unattainable without invalid message deliveries or app signal] PublishThreshold = -5000.0
+GossipThreshold = -4000.0 [unattainable without invalid message deliveries or app signal]
+PublishThreshold = -5000.0
 GraylistThreshold = -10000.0
-AcceptPXThreshold = 0.0 [PX is not enabled as there is no peer routing system] OpportunisticGraftThreshold = 0.0 [this effectively disables by default – it is enabled in certain tests] IP_ColocationFactorWeight = TBD
-IP_ColocationFactorThresold = TBD ScoreDecayInterval = TBD DecayZeroThresold = TBD TimeToRetainScore = TBD
+AcceptPXThreshold = 0.0 [PX is not enabled as there is no peer routing system]
+OpportunisticGraftThreshold = 0.0 [this effectively disables by default – it is enabled in certain tests] IP_ColocationFactorWeight = TBD
+IP_ColocationFactorThresold = TBD 
+ScoreDecayInterval = TBD 
+DecayZeroThresold = TBD 
+TimeToRetainScore = TBD
 
 **Topic Config:**
 TopicName = blocks MessageRate = 120/s MessageSize = 2KB
 Peer Score Parameters:
 TopicWeight = 0.25
-TimeinMeshWeight = 0.0027 TimeinMeshQuantum = "1s" TimeinMeshCap = 3600.0 FirstMessageDeliveriesWeight = 0.664 FirstMessageDeliveriesDecay = 0.9916 FirstMessageDeliveriesCap = 1500.0 MeshMessageDeliveriesWeight = -0.25 MeshMessageDeliveriesDecay = 0.997 MeshMessageDeliveriesCap = 400.0 MeshMessageDeliveriesThreshold = 10.0 MeshMessageDeliveriesActivation = "1m" MeshMessageDeliveryWindow = "5ms" MeshFailurePenaltyWeight = -0.25 MeshFailurePenaltyDecay = 0.997
+TimeinMeshWeight = 0.0027
+TimeinMeshQuantum = "1s" 
+TimeinMeshCap = 3600.0 
+FirstMessageDeliveriesWeight = 0.664 
+FirstMessageDeliveriesDecay = 0.9916 
+FirstMessageDeliveriesCap = 1500.0 
+MeshMessageDeliveriesWeight = -0.25 
+MeshMessageDeliveriesDecay = 0.997 
+MeshMessageDeliveriesCap = 400.0 MeshMessageDeliveriesThreshold = 10.0 
+MeshMessageDeliveriesActivation = "1m" 
+MeshMessageDeliveryWindow = "5ms"
+MeshFailurePenaltyWeight = -0.25 
+MeshFailurePenaltyDecay = 0.997
 InvalidMessageDeliveriesWeight = -99.0 InvalidMessageDeliveriesDecay = 0.9994
 
-##TESTS
+## TESTS
 
 **TEST 1 -Delivery Latency Gossipsub-v1.1 - Baseline Scenario ​(No attackers)**
 N_PUBLISHERS = 100 N_LURKERS = 900 N_ATTACKER_NODES = 0
@@ -90,15 +130,14 @@ N_PUBLISHERS = 100
 N_LURKERS = 900
 N_ATTACKER_NODES = 4000
 Nodes join all together at time 0
-Publishers start publishing at the 30s mark in the test run. (is this a consequence or a test parameter?)
-opportunistic grafting period is set to 10 sec,in order to get meaningful results out of this test, whereas this parameter is set to 1 min in real deployments.
-(which parameter is it?)
+Publishers start publishing at the 30s mark in the test run. *(is this a consequence or a test parameter?)*
+Ppportunistic grafting period is set to 10 sec,in order to get meaningful results out of this test, whereas this parameter is set to 1 min in real deployments. *(which parameter is it?)*
 Increasing the gossip factor to 0.4 results in a p99 latency of 1.177 sec without opportunistic grafting and 1.027 with opportunistic grafting
 
 **TEST 8 - ​Covert Flash Attack**
  N_PUBLISHERS = 100 N_LURKERS = 900 N_ATTACKER_NODES = 4000 Sybils join at time 0
 Publishers start publishing at the 30s mark
-SybilAttackDelay = 120s (Sybil behaves properly for 2 minutes before attacking)
+SybilAttackDelay = 120s *(Sybil behaves properly for 2 minutes before attacking)*
 TestRuntime = 5min
 opportunistic grafting period is set to 10 sec whereas this parameter is set to 1 min in real deployments.
 
@@ -107,11 +146,12 @@ N_PUBLISHERS = 100
 N_LURKERS = 900
 N_ATTACKER_NODES = 4000
 Sybils starts at time 0
-opportunistic grafting period is set to 10 sec ​whereas this parameter is set to 1 min in real deployments. honest peers and the Sybils connect concurrently at time 0 N_ATTACKER_PEERS_FOR_CONTAINER = 160
+opportunistic grafting period is set to 10 sec ​whereas this parameter is set to 1 min in real deployments. honest peers and the Sybils connect concurrently at time 0s
+N_ATTACKER_PEERS_FOR_CONTAINER = 160
 Publishers begin publishing messages after 30s.
 Exclusively for this test, we set a value of -100 for the 𝑃​6 ​parameter weight; the parameter was disabled in the previous tests in order to allow us to pack multiple Sybils per container and achieve high sybil:honest connection ratios.
 
-###Questions about general parameters:
+### Questions about general parameters:
 1)​ Is overlayD=D?
 2) ​If Opportunistic grafting takes place every minute: does it mean that O​ pportunisticGraftHeartbeatTicks= 60? Or there should be another parameter to set?
 3)​ ​“The attack nodes are introduced 1 min into the test” : Does it mean that ​AttackerConnectionDelay = 60s ? 4) ​“Sybils establishing 100 honest connections each” : does it mean that AttackDegree=100 ?
