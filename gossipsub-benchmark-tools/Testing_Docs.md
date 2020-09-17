@@ -24,19 +24,19 @@ Some parameters are not defined yet, and their value is set to “TBD” (To Be 
 
   
 
-TestSetupTime: TBD
+TestSetupTime: **TBD**
 
   
 
-TestRuntime: TBD
+TestRuntime: **TBD**
 
   
 
-WarmupTime : TBD
+WarmupTime : **TBD**
 
   
 
-CooldownTime: TBD
+CooldownTime: **TBD**
 
   
 
@@ -56,11 +56,11 @@ N_ATTACKER_NODES = 4000
 
   
 
-N_HONEST_PEERS_FOR_CONTAINER = TBD
+N_HONEST_PEERS_FOR_CONTAINER = **TBD**
 
   
 
-N_ATTACKER_PEERS_FOR_CONTAINER = TBD
+N_ATTACKER_PEERS_FOR_CONTAINER = **TBD**
 
   
   
@@ -71,19 +71,19 @@ HeartBeatInterval = 1s
 
   
 
-IntitialHeartbeatDelay = TBD
+IntitialHeartbeatDelay = **TBD**
 
   
 
-SizeOfValidationQueue= TBD
+SizeOfValidationQueue= **TBD**
 
   
 
-SizeOfOutboundRPC_Queue = TBD
+SizeOfOutboundRPC_Queue = **TBD**
 
   
 
-IntervalToDumpPeerScores= TBD
+IntervalToDumpPeerScores= **TBD**
 
   
 
@@ -119,15 +119,15 @@ Heartbeat = 1s
 
   
 
-OpportunisticGraftHeartbeatTicks = TBD
+OpportunisticGraftHeartbeatTicks = **TBD**
 
   ### Network:
 
-MIN_LATENCY = TBD
+MIN_LATENCY = **TBD**
 
   
 
-MAX_LATENCY = TBD
+MAX_LATENCY = **TBD**
 
   
 
@@ -187,23 +187,25 @@ AttackPublishersOnly = ... (value depend on specific TEST)
 
   
 
-JitterForAttackerDelay = TBD
+JitterForAttackerDelay = **TBD**
 
   
 
-SybilDropProbability = TBD
+SybilDropProbability = **TBD**
 
   
 
-SybilAttackDelay = TBD
+SybilAttackDelay = **TBD**
 
   
 
-RegraftDelay = TBD
+RegraftDelay = **TBD**
 
   
 
-RegraftBackoff = TBD SeenCacheDuration = TBD
+RegraftBackoff = **TBD**
+
+ SeenCacheDuration = **TBD**
 
   
 
@@ -231,23 +233,23 @@ OpportunisticGraftThreshold = 0.0 [this effectively disables by default – it i
 
   
 
-IP_ColocationFactorWeight = TBD
+IP_ColocationFactorWeight = **TBD**
 
   
 
-IP_ColocationFactorThresold = TBD
+IP_ColocationFactorThresold = **TBD**
 
   
 
-ScoreDecayInterval = TBD
+ScoreDecayInterval = **TBD**
 
   
 
-DecayZeroThresold = TBD
+DecayZeroThresold = **TBD**
 
   
 
-TimeToRetainScore = TBD
+TimeToRetainScore = **TBD**
 
   
 
