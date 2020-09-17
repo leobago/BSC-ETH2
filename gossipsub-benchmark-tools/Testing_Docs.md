@@ -1,8 +1,26 @@
+# TESTS TO RUN
+
+  
+
+Tests are run with the parameters used in the Gossipsub-v1.1 Evaluation Report made by Protocol Labs.
+
+The objective of the testing is the replication of the results obtained in the Gossipsub-v1.1 Evaluation Report, as well as extending the scope of those tests, both in magnitude and variety of attack vectors.
+
+Most of the parameters will have the same value for most of the tests, but the value of several parameters will change in every test.
+
+For this reason, here there are some standard parameters used for all the test.
+
+Depending on the test some of them will need to be changed accordingly to the specific documentation provided in the test.
+
+Some parameters are not defined yet, and their value is set to “TBD” (To Be Defined).
+
+  
+
 ## Gossipsub-v1.1 Mesh Parameters
 
   
 
-**Time:**
+### Time:
 
   
 
@@ -22,7 +40,7 @@ CooldownTime: TBD
 
   
 
-**Node Counts:**
+### Node Counts:
 
   
 
@@ -47,7 +65,7 @@ N_ATTACKER_PEERS_FOR_CONTAINER = TBD
   
   
 
-**Pubsub:**
+### Pubsub:
 
 HeartBeatInterval = 1s
 
@@ -103,9 +121,7 @@ Heartbeat = 1s
 
 OpportunisticGraftHeartbeatTicks = TBD
 
-  
-
-**Network:**
+  ### Network:
 
 MIN_LATENCY = TBD
 
@@ -191,7 +207,7 @@ RegraftBackoff = TBD SeenCacheDuration = TBD
 
   
 
-**PeerScore:**
+### PeerScore:
 
   
 
@@ -235,7 +251,7 @@ TimeToRetainScore = TBD
 
   
 
-**Topic Config:**
+### Topic Config:
 
   
 
@@ -314,12 +330,13 @@ InvalidMessageDeliveriesWeight = -99.0
  InvalidMessageDeliveriesDecay = 0.9994
 
   
+---
 
-## TESTS
+## TESTS:
 
   
 
-**TEST 1 -Delivery Latency Gossipsub-v1.1 - Baseline Scenario ​(No attackers):**
+### TEST 1 -Delivery Latency Gossipsub-v1.1 - Baseline Scenario ​(No attackers):
 
   
 
@@ -333,9 +350,10 @@ N_LURKERS = 900
 
 N_ATTACKER_NODES = 0
 
-  
 
-**TEST 2 - Eclipse Attack Against a Single Target:**
+  ---
+
+### TEST 2 - Eclipse Attack Against a Single Target:
 
   
 
@@ -358,8 +376,8 @@ AttackBehaviour = target a single node
 the attack nodes are introduced 1 min into the test WarmupTime : 30s
 
   
-
-**TEST 3 - ​Eclipse Attack Against the Entire Network N_PUBLISHERS = 100:**
+---
+### TEST 3 - ​Eclipse Attack Against the Entire Network N_PUBLISHERS = 100:
 
   
 
@@ -377,9 +395,11 @@ AttackBehaviour: target every node
 
 Sybils establishing 100 honest connections each WarmupTime : 30s
 
-  
+  ---
 
-**TEST 4 - ​Eclipse Attack Against all Publishers N_PUBLISHERS = 100:**
+### TEST 4 - ​Eclipse Attack Against all Publishers:
+
+N_PUBLISHERS = 100:
 
   
 
@@ -398,8 +418,10 @@ AttackBehaviour = Target Publishers Only
 Sybils establishing 100 honest connections each WarmupTime : 30s
 
   
+---
+### TEST 5 - ​Censor Attack Against a Single Target
 
-**TEST 5 - ​Censor Attack Against a Single Target N_PUBLISHERS = 100:**
+ N_PUBLISHERS = 100:
 
   
 
@@ -417,13 +439,15 @@ Sybils establishing 100 honest connections each warm-up period is 30 sec
 
 AttackBehaviour = Censor Target Node
 
-  
+  ---
 
 **TEST 6 - ​Network Degradation Attack N_PUBLISHERS = 100**
 
   
 
-N_LURKERS = 900 N_ATTACKER_NODES = 2000
+N_LURKERS = 900 
+
+N_ATTACKER_NODES = 2000
 
   
 
@@ -434,8 +458,8 @@ warm-up period is 30 sec
 attack nodes are introduced 1min into the test
 
   
-
-**TEST 7 - Cold Boot Attack**
+---
+### TEST 7 - Cold Boot Attack
 
   
 
@@ -467,9 +491,9 @@ to 1 min in real deployments. *(which parameter is it?)*
 
 Increasing the gossip factor to 0.4 results in a p99 latency of 1.177 sec without opportunistic grafting and 1.027 with opportunistic grafting
 
-  
+  ---
 
-**TEST 8 - ​Covert Flash Attack**
+### TEST 8 - ​Covert Flash Attack
 
   
 
@@ -497,9 +521,8 @@ TestRuntime = 5min
 
 opportunistic grafting period is set to 10 sec whereas this parameter is set to 1 min in real deployments.
 
-  
-
-**TEST 9 -Attack at Dawn**
+  ---
+### TEST 9 -Attack at Dawn
 
   
 
@@ -537,9 +560,9 @@ Publishers begin publishing messages after 30s.
 
 Exclusively for this test, we set a value of -100 for the 𝑃​6 ​parameter weight; the parameter was disabled in the previous tests in order to allow us to pack multiple Sybils per container and achieve high sybil:honest connection ratios.
 
-  
-
-### Questions about general parameters:
+---  
+---
+## Questions about general parameters:
 
   
 
