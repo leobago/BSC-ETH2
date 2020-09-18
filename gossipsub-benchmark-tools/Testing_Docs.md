@@ -185,7 +185,6 @@ TargetSingleNode = ... (value depend on specific TEST)
 
 AttackPublishersOnly = ... (value depend on specific TEST)
 
-  
 
 JitterForAttackerDelay = **TBD**
 
@@ -422,6 +421,7 @@ AttackBehaviour = Target Publishers Only
   
 
 AttackDegree=100
+
 WarmupTime : 30s
 
   
@@ -442,7 +442,7 @@ N_ATTACKER_NODES = 2000
 
 AttackDegree=100
 
-warm-up period is 30 sec
+WarmupTime=30s
 
   
 
