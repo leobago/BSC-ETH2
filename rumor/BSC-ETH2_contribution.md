@@ -13,7 +13,14 @@ This file compiles the work and contributions that the BSC-ETH2 team did and aim
  - [x] Suggested adding a feature to the `dv5 random` command that automatically adds the founded peers to the peerstore without needing the `next` command. Protolambda added the feature with the `-stepwise` and `--interval` flags on the `dv5 random` command. [Link to the commit](https://github.com/protolambda/rumor/commit/https://github.com/protolambda/rumor/commit/0df828c07e9f70ab7060699c919fe687ba8fc4fa)
  - [ ] Spotted misbehaviour on the libp2p host, it wasn't automatically peering peers from the peerstore following the `--lo-peers` and `--hi-peers` flags.
  - [x] Spotted a terminal block/freeze while running the command `gossip log`. Protolambda fixed the bug. [Link to the commit](https://github.com/protolambda/rumor/commit/https://github.com/protolambda/rumor/commit/a944296401a05cdb0895709a6cd3aee54d750d15)
+ - [x] Spotted a terminal block/freeze while running the command `gossip events`. Protolambda fixed the bug. [Link to the commit](https://github.com/protolambda/rumor/commit/4e8858f)
+
  - [ ] Spotted misbehaviour on the `gossip` implementation. The `gossip` command doesn't connect on the given topic to any of the peers. Making it unable to log the messages/gossips.
+        (Despite the gossip implementation seems to be working fine on custom topics, the implementations fails on the medalla testnet with real topics)
+        (Currnetly taking a look over this)
+
+
+// Suggestions leaved on a side so far, for their non direct relation with the BSC-ETH2 team goals
  - [ ] Suggested adding the functionality of following the head of the chain (getting the blocks and states) so that we could keep the connections for a longer time. Basically adding the "Full node" functionality.
  
  
