@@ -67,7 +67,7 @@ N_ATTACKER_PEERS_FOR_CONTAINER = **TBD**
 
 ### Pubsub:
 
-HeartBeatInterval = 1s
+HeartBeatInterval = 1s --- Ethereum community seems to be changing it to 0.7s
 
   
 
