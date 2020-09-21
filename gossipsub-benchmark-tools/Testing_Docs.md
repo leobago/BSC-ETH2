@@ -87,11 +87,11 @@ IntervalToDumpPeerScores= **TBD**
 
   
 
-OVERLAY_D = 8
+OVERLAY_D = 8   (In ETH2 docs DLO=6)
 
   
 
-OVERLAY_DLO = 6
+OVERLAY_DLO = 6  (In ETH2 docs DLO=4)
 
   
 
@@ -103,7 +103,7 @@ OVERLAY_DSCORE = 6
 
   
 
-OVERLAY_DLAZY = 12
+OVERLAY_DLAZY = 12 ( In ETH2 Docs DLazy = D)
 
   
 
@@ -577,7 +577,7 @@ Exclusively for this test, we set a value of -100 for the 𝑃​6 ​parameter 
 - To which parameter does the “𝑃​6 p​ arameter weight” actually corresponds?
 - Where are documented the values of the parameters labeled here as "TBD" (To Be Defined)?
 - ​Is the following information useful to understand how some of the “TBD” parameters need to be set?
-  
+- Is OverlayD = D / OverlayDHi = DHi / OverlayDLo= DLo?
 
 >The primary load is 2.5k to 25k attestations ( 250 B per message) per minute (sent in bursts every 12
 
