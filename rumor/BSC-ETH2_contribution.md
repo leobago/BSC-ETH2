@@ -14,8 +14,9 @@ This file compiles the work and contributions that the BSC-ETH2 team did and aim
  - [ ] Spotted misbehaviour on the libp2p host, it wasn't automatically peering peers from the peerstore following the `--lo-peers` and `--hi-peers` flags.
  - [x] Spotted a terminal block/freeze while running the command `gossip log`. Protolambda fixed the bug. [Link to the commit](https://github.com/protolambda/rumor/commit/https://github.com/protolambda/rumor/commit/a944296401a05cdb0895709a6cd3aee54d750d15)
  - [x] Spotted a terminal block/freeze while running the command `gossip events`. Protolambda fixed the bug. [Link to the commit](https://github.com/protolambda/rumor/commit/4e8858f)
- - [X] Spotted misbehaviour on the `gossip` implementation. The `gossip` command doesn't connect on the given topic to any of the peers. Making it unable to log the messages/gossips. Spotted the error by the BSC-ETH2 team. The example on the medalla_gossip.rumor has a wrong fork_digest usage, they use "0xXXXXXXXX" while it needs to be "XXXXXX" without the "0x". [Pull request](https://github.com/protolambda/rumor/commit/90e632f9ffa82e1728ae958dfcf6e04da6fb883d) accepted fixing the fork_digest value on the medalla_gossip.rumor file.
- 
+ - [X] Spotted misbehaviour on the `gossip` implementation. The `gossip` command doesn't connect any of the peers on the given medalla_topic. Making it unable to log the messages. Spotted the error by the BSC-ETH2 team. The example on the medalla_gossip.rumor had a wrong fork_digest value, it was ussing "0xXXXXXXXX" while it has to be "XXXXXX" (without the "0x" prefix). [Pull request](https://github.com/protolambda/rumor/commit/90e632f9ffa82e1728ae958dfcf6e04da6fb883d) accepted fixing the issue on the medalla_gossip.rumor example file.
+ - [ ] Suggestion from @Protolambda to add a shortcut command for each known topic, allowing to parse the fork version in either format. That would avoid this error happening again.
+  
         
 
 
