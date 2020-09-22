@@ -67,7 +67,7 @@ N_ATTACKER_PEERS_FOR_CONTAINER = **TBD**
 
 ### Pubsub:
 
-HeartBeatInterval = 1s
+HeartBeatInterval = 1s --- Ethereum community seems to be changing it to 0.7s
 
   
 
@@ -87,11 +87,11 @@ IntervalToDumpPeerScores= **TBD**
 
   
 
-OVERLAY_D = 8
+OVERLAY_D = 8   (In ETH2 docs DLO=6)
 
   
 
-OVERLAY_DLO = 6
+OVERLAY_DLO = 6  (In ETH2 docs DLO=4)
 
   
 
@@ -103,7 +103,7 @@ OVERLAY_DSCORE = 6
 
   
 
-OVERLAY_DLAZY = 12
+OVERLAY_DLAZY = 12 ( In ETH2 Docs DLazy = D)
 
   
 
@@ -119,7 +119,7 @@ Heartbeat = 1s
 
   
 
-OpportunisticGraftHeartbeatTicks = **TBD**
+OpportunisticGraftHeartbeatTicks = 1m for deployment, 10 seconds for meaningful testing results
 
   ### Network:
 
@@ -185,7 +185,6 @@ TargetSingleNode = ... (value depend on specific TEST)
 
 AttackPublishersOnly = ... (value depend on specific TEST)
 
-  
 
 JitterForAttackerDelay = **TBD**
 
@@ -375,7 +374,9 @@ AttackBehaviour = target a single node
 
   
 
-the attack nodes are introduced 1 min into the test WarmupTime : 30s
+​AttackerConnectionDelay = 60s
+
+ WarmupTime : 30s
 
   
 ---
@@ -395,7 +396,9 @@ AttackBehaviour: target every node
 
   
 
-Sybils establishing 100 honest connections each WarmupTime : 30s
+AttackDegree=100
+
+ WarmupTime : 30s
 
   ---
 
@@ -417,7 +420,9 @@ AttackBehaviour = Target Publishers Only
 
   
 
-Sybils establishing 100 honest connections each WarmupTime : 30s
+AttackDegree=100
+
+WarmupTime : 30s
 
   
 ---
@@ -435,7 +440,9 @@ N_ATTACKER_NODES = 2000
 
   
 
-Sybils establishing 100 honest connections each warm-up period is 30 sec
+AttackDegree=100
+
+WarmupTime=30s
 
   
 
@@ -457,7 +464,7 @@ warm-up period is 30 sec
 
   
 
-attack nodes are introduced 1min into the test
+​AttackerConnectionDelay = 60s
 
   
 ---
@@ -477,17 +484,14 @@ N_ATTACKER_NODES = 4000
 
   
 
-Nodes join all together at time 0
+HonestPeerConnectionDelay=0s
 
   
 
-Publishers start publishing at the 30s mark in the test run. *(is this a consequence or a test parameter?)*
+WarmupTime= 30s (Publishers start publishing at the 30s mark in the test run)
 
   
-
-Opportunistic grafting period is set to 10 sec,in order to get meaningful results out of this test, whereas this parameter is set
-
-to 1 min in real deployments. *(which parameter is it?)*
+O​pportunisticGraftHeartbeatTicks= 10s (in order to get meaningful results out of this test, it should be 1 min in real deployments)
 
   
 
@@ -519,11 +523,10 @@ SybilAttackDelay = 120s *(Sybil behaves properly for 2 minutes before attacking)
 
 TestRuntime = 5min
 
-  
+O​pportunisticGraftHeartbeatTicks= 10s (in order to get meaningful results out of this test, it should be 1 min in real deployments)
 
-opportunistic grafting period is set to 10 sec whereas this parameter is set to 1 min in real deployments.
 
-  ---
+---
 ### TEST 9 -Attack at Dawn
 
   
@@ -544,11 +547,15 @@ Sybils starts at time 0
 
   
 
-Opportunistic grafting period is set to 10 sec ​whereas this parameter is set to 1 min in real deployments. honest peers and the
+O​pportunisticGraftHeartbeatTicks= 10s (in order to get meaningful results out of this test, it should be 1 min in real deployments)
+
+
 
   
 
-Sybils connect concurrently at time 0s
+AttackerConnectionDelay = 0s
+HonestPeerConnectionDelay=0s 
+//(honest peers and Sybils connect concurrently at time 0s)
 
   
 
@@ -566,22 +573,11 @@ Exclusively for this test, we set a value of -100 for the 𝑃​6 ​parameter 
 ---
 ## Questions about general parameters:
 
-  
 
-- Is overlayD=D?
-- ​If Opportunistic grafting takes place every minute: does it mean that O​ pportunisticGraftHeartbeatTicks= 60? Or there should be another parameter to set?
-
-- ​“The attack nodes are introduced 1 min into the test” : Does it mean that ​AttackerConnectionDelay = 60s ?  
-- ​“Sybils establishing 100 honest connections each” : does it mean that AttackDegree=100?
-
-- Does “Nodes join all together at time 0” mean that ​AttackerConnectionDelay = 0s and HonestPeerConnectionDelay=0s?
-
-  
-
-- ​“Publishers start publishing at the 30s mark in the test run”: which parameter should represent this? 7)​ To which parameter does the “𝑃​6 p​ arameter weight” actually corresponds?
+- To which parameter does the “𝑃​6 p​ arameter weight” actually corresponds?
+- Where are documented the values of the parameters labeled here as "TBD" (To Be Defined)?
 - ​Is the following information useful to understand how some of the “TBD” parameters need to be set?
-
-  
+- Is OverlayD = D / OverlayDHi = DHi / OverlayDLo= DLo?
 
 >The primary load is 2.5k to 25k attestations ( 250 B per message) per minute (sent in bursts every 12
 
@@ -595,4 +591,4 @@ Exclusively for this test, we set a value of -100 for the 𝑃​6 ​parameter 
 
   
 
-- ​Is there any other considerations that makes us able to deduct what are the values of “TBD” parameters?
+- ​Is there any other considerations that will makes us able to deduct what are the values of “TBD” parameters?
