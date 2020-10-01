@@ -29,7 +29,9 @@ echo "Crawler running"
 
 sleep 20s
 
-
+# try to connect to the gossip topics for eth2 (right now it's just a test with /eth/fork_digest/beacon_block/ssz_snappy)
+# Currently not working for some reason
+mike: include medalla_gossip.rumor
 
 # Check after 10 secs how many peers did we get (should be between 70-80)
 # The auto-peering option ofered by the libp2p library
@@ -39,50 +41,29 @@ sleep 20s
 # Finish the dv5
 # Ideally, dv5 and the host should keep discovering peers and connecting to them automatically
 # For our little crawler, 50-80 peers is enough
-mike: _dv5_run cancel
+#mike: _dv5_run cancel
 
+mike: include medalla_peer_connect.rumor
+
+echo "----- Peers connected so far -----"
+mike: peer list connected
 sleep 1s
 
-# try to connect to the gossip topics for eth2 (right now it's just a test with /eth/fork_digest/beacon_block/ssz_snappy)
-# Currently not working for some reason
-mike: include medalla_gossip.rumor
-
-echo "peers on the peerstore"
-mike: peer list all --details
-
-# To manualy connect the peers on the peerstore, at least until the bug is fixed, 
-# we can simply iterate through the peers on the peerstore
-for peer in ${!__peers[@]}
-do
-    echo "peer id: $peer"
-    _peer_details mike: peer info "$peer"
-    mike: peer connect "$_peer_details_addrs"
-done
+echo "----- Gossip peers connected to the beacon_block topic"
+blocks_topic="/eth2/$fork_digest/beacon_block/ssz_snappy"
+mike: gossip list-peers $blocks_topic
 
 echo
 
 echo "peers on the peerstore"
 mike: peer list all --details
-
-# Print the known peers into a file
+# Log the crawled peers into a file
 grab __peers > peer_list.txt
 
-echo "peers connected to:"
-mike: peer list connected
-
-sleep 1s
-
-mike: gossip list-peers "/eth2/$fork_digest/beacon_block/ssz_snappy"
-
-
-# --- Comment the section bellow if the crawler wants to be used as a node initializer -----
-
-sleep 5s 
-
-echo "Finishing the script"
+# Type: `mike: peer list connected` to see the amount of peers that we are connected with
 
 # Finish routine 
-mike: kill
-
-echo "script finished"
-exit
+#mike: kill
+#
+#echo "script finished"
+#exit

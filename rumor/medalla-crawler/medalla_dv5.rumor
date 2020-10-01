@@ -25,7 +25,7 @@ echo "bootnodes: $bootnodes"
 bootnodes=$(echo -n $bootnodes | tr " " ",")
 
 # Run the dv5 service using the bootnodes 
-_dv5_run lvl_warn dv5 run --bootnodes=$bootnodes
+_dv5_run lvl_error dv5 run --bootnodes=$bootnodes
 
 # Add the get peers to the peerstore filtering by fork-digest
 fork_digest="0xe7a75d5a"

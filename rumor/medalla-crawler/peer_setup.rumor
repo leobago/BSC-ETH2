@@ -2,10 +2,10 @@
 
 fork_digest="0xe7a75d5a"
 
-# We zero out attnets here, even though we advertise it in the ENR. We can't really support the attnets without gossip.
-peer metadata set \
-      --attnets="0x0000000000000000" \
-      --seq-number=0
+## We zero out attnets here, even though we advertise it in the ENR. We can't really support the attnets without gossip.
+#peer metadata set \
+#      --attnets="0x0000000000000000" \
+#      --seq-number=0
 
 # change status, as if we are at the start of the Medalla chain
 peer status set \
@@ -16,7 +16,7 @@ peer status set \
       --head-slot=0
 
 # Set up malicious endpoints, never actually sync
-rpc blocks-by-range listen --drop --compression=snappy
+rpc blocks-by-range listen --drop  --compression=snappy
 rpc blocks-by-root listen --drop --compression=snappy
 rpc goodbye listen --drop --compression=snappy
 

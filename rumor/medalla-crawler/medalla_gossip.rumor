@@ -11,15 +11,35 @@
 
 gossip start
 
-fork_digest="0xe7a75d5a"
+fork_digest="e7a75d5a"
 encoding="ssz_snappy"
 
 # Compose the topic format
 blocks_topic="/eth2/$fork_digest/beacon_block/$encoding"
+beacon_aggregate_topic="/eth2/$fork_digest/beacon_aggregate_and_proof/$encoding"
+voluntary_exit_topic="/eth2/$fork_digest/voluntary_exit/$encoding"
+proposer_slashing_topic="/eth2/$fork_digest/proposer_slashing/$encoding"
+attester_slashing_topic="/eth2/$fork_digest/attester_slashing/$encoding"
+
 # Join the topic
 gossip join --topic=$blocks_topic 
+#gossip join --topic=$beacon_aggregate_topic
+#gossip join --topic=$voluntary_exit_topic
+#gossip join --topic=$proposer_slashing_topic
+#gossip join --topic=$attester_slashing_topic
 
-# Log the output into a .txt file
+# Log the output into a .txt file 
 gossip log $blocks_topic
+#gossip log $beacon_aggregate_topic
+#gossip log $voluntary_exit_topic
+#gossip log $proposer_slashing_topic
+#gossip log $attester_slashing_topic
+
+# Log the events happening on gossip 
+gossip events --topic="$blocks_topic"
+#gossip events --topic="$beacon_aggregate_topic"
+#gossip events --topic="$voluntary_exit_topic"
+#gossip events --topic="$proposer_slashing_topic"
+#gossip events --topic="$attester_slashing_topic"
 
 echo "logging medalla beacon blocks"

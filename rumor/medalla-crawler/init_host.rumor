@@ -31,7 +31,7 @@ enr make \
   --next-fork-epoch="0xffffffffffffffff"
 
 # Set the maximum and minimum number of peers and the name as the network will identify us
-host start --lo-peers=200 --hi-peers=300 --peer-grace-period=30s --agent="ETH2-BSC-Crawler"
+host start --lo-peers=700 --hi-peers=1000 --peer-grace-period=30s --agent="ETH2-BSC-Crawler"
 # Set all the connections and streams as visible
 host notify all
 # listen on public facing network interface
