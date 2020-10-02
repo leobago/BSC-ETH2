@@ -26,7 +26,7 @@ Anyway, metrics do not appear on the dashboard.
 -------
 Metrics can also be seen at `http://127.0.0.1:8008/metrics`, (example below) ,but the page needs to be manually refreshed in order to get updated metrics. This makes challenging the gathering of a metric historial
 
-![metrics_1](/img/example_1.png)
+![metrics_1](./img/example_1.png)
 
 
 When running `make NIMFLAGS="-d:insecure" medalla`, the following logs appear:
@@ -40,7 +40,7 @@ ld: warning: could not create compact unwind for _sha256_block_data_order: does 
 Some metrics can be seen through the Prometeus UI directly, at localhost:9090.
 
 Example below:
-![metrics_2](/img/example_2.png)
+![metrics_2](./img/example_2.png)
 
 ### Teku:
 
