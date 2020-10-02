@@ -48,11 +48,8 @@ Teku node is currently syncing to medalla testnet.
 The command that we needed to launch was: `./teku --network=medalla --metrics-enabled --rest-api-enabled --rest-api-docs-enabled`
 Metrics can be enabled through `--metrics-enabled`, and visualizes through Prometheus, at localhost:9090.
 
-Metrics that are shown do not seem to be relative to blocks, slashings, epochs and so on. The utility of the metric shown seems to be limited, and it is not clear if it’s due to misconfiguration or because the node is not synced yet.
 
-Further research needs to be performed to verify if additional metrics can be gathered
-
-Team is currently working on adding the Teku node [ETH2-stats](https://eth2stats.io/add-node)
+Team is currently working on adding the Teku node [ETH2-stats](https://eth2stats.io/add-node) and run Teku as a validator
 
 ### Lighthouse Eth2 Client
 
