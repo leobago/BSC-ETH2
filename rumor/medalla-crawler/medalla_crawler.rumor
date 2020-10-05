@@ -43,8 +43,7 @@ mike: include medalla_gossip.rumor
 # For our little crawler, 50-80 peers is enough
 #mike: _dv5_run cancel
 
-mike: include medalla_peer_connect.rumor
-
+mike: include connect_peers.rumor
 echo "----- Peers connected so far -----"
 mike: peer list connected
 sleep 1s
