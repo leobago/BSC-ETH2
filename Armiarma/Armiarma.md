@@ -11,7 +11,7 @@ Armiarma appears from that need of monitoring the testnet, and aims to be a tool
 
 When talking about eth2 debugging tools, it isn’t possible not to talk about Rumor. Rumor, developed to generate custom p2p hosts able to interact with the Eth2 network, showed a huge potential on debugging the eth2 p2p network, becoming the ideal base we could use to build a network monitor.
 Armiarma is divided into two main parts:
-1. The Network Crawler. A slightly tuned Rumor version used to gather the information about  the GossipSub implementation and peers. 
+1. The Network Crawler. A slightly tuned Rumor version used to gather the information about  the GossipSub implementation and peers.
 2. The Data Analysis. Used to analyze and plot the gathered metrics from the crawler.
 
 *NOTE: Rumor is a tool that is currently in development. So that the Armiarma Implementation is constantly improving and adding new features or gathering new metrics from the network.*
@@ -45,7 +45,7 @@ Once we have been connected to a peer, it records:
 
 On a deeper analysis of the received metrics, this is the data we have been able to collect and extract from the network.
 
-*NOTE: the data used for generating the following charts was gathered from the Armiarma crawler during few hours. The conclusions that can be obtained from this report might be bieased by the root nodes used on the dv5 protocol.*
+*NOTE: the data used for generating the following charts was gathered from the Armiarma crawler during few hours. The conclusions that can be obtained from this report might be biased by the root nodes used on the dv5 protocol.*
 
 ![Figure 1. Comparison between the number of peers got from the dv5 and the ones connected to.](./charts/TotalPeersVsConnected.png)
 
