@@ -45,39 +45,39 @@ NOTE: The data used to generate the plots that will be shown below has been take
 
 On a deeper analysis of the received metrics, this is the data we have been able to collect and extract from the network.
 
-![Figure 1. Comparison between the number of peers got from the dv5 and the ones connected to.](/charts/TotalPeersVsConnected.png)
+![Figure 1. Comparison between the number of peers got from the dv5 and the ones connected to.](./charts/TotalPeersVsConnected.png)
 
-![Figure 2. Total of peers connected to, filtered by countries.](/charts/PeersClassifiedByCountry.png)
+![Figure 2. Total of peers connected to, filtered by countries.](./charts/PeersClassifiedByCountry.png)
 
-![Figure 3. Number of peers connected to, filtered by client type.](/charts/PeersOnClients.png)
+![Figure 3. Number of peers connected to, filtered by client type.](./charts/PeersOnClients.png)
 
-![Figure 4. Number of connections established with each peer.](/charts/NumberOfConnectionsPerPeer.png)
+![Figure 4. Number of connections established with each peer.](./charts/NumberOfConnectionsPerPeer.png)
 Note: The connection events are one per each GossipSub Topic (Connected to 5 topics in total)
 
-![Figure 5. Number of disconnections with each peer.](/charts/NumberOfDisconnectionsPerPeer.png)
+![Figure 5. Number of disconnections with each peer.](./charts/NumberOfDisconnectionsPerPeer.png)
 Note: The connection events are one per each GossipSub Topic (Connected to 5 topics in total)
 
-![Figure 6. Amount of time connected with each peer in milliseconds.](/charts/MillisecondsConnectedToPeers.png)
+![Figure 6. Amount of time connected with each peer in milliseconds.](./charts/MillisecondsConnectedToPeers.png)
 Note: The total amount of time is the sum of the time connected to each GossipSub Topic (Connected to 5 topics in total)
 
-![Figure 7. Average connections to peers from the different clients.](/charts/AverageConnectionsPerClientPeers.png)
+![Figure 7. Average connections to peers from the different clients.](./charts/AverageConnectionsPerClientPeers.png)
 Note: The average was made from the total amount of connections shown previously.
 
-![Figure 8. Average disconnections to peers from the different clients.](/charts/AverageDisconnectionPerClientPeers.png)
+![Figure 8. Average disconnections to peers from the different clients.](./charts/AverageDisconnectionPerClientPeers.png)
 Note: The average was made from the total amount of disconnections shown previously.
 
-![Figure 9. Average time connected to peers from the different clients.](/charts/AverageTotalTimeConnectedToClientPeers.png)
+![Figure 9. Average time connected to peers from the different clients.](./charts/AverageTotalTimeConnectedToClientPeers.png)
 Note: The average was made from the total amount of time shown previously.
 
-![Figure 10. Number of messages received on the BeaconBlock topic from peers filtered by clients.](/charts/NumberOfMessagesReceivedBeaconBlock.png)
+![Figure 10. Number of messages received on the BeaconBlock topic from peers filtered by clients.](./charts/NumberOfMessagesReceivedBeaconBlock.png)
 
-![Figure 11. Average of messages received on the BeaconBlock topic from peers filtered by clients.](/charts/AverageMessagesReceivedBeaconBlock.png)
+![Figure 11. Average of messages received on the BeaconBlock topic from peers filtered by clients.](./charts/AverageMessagesReceivedBeaconBlock.png)
 
-![Figure 12. Number of messages received on the BeaconAggregateAndProof topic from peers filtered by clients.](/charts/NumberOfMessagesReceivedBeaconAggregatedAndProof.png)
+![Figure 12. Number of messages received on the BeaconAggregateAndProof topic from peers filtered by clients.](./charts/NumberOfMessagesReceivedBeaconAggregatedAndProof.png)
 
-![Figure 13. Average of messages received on the BeaconAggregateAndProof topic from peers filtered by clients.](/charts/AverageMessagesReceivedBeaconAggregateAndProof.png)
+![Figure 13. Average of messages received on the BeaconAggregateAndProof topic from peers filtered by clients.](./charts/AverageMessagesReceivedBeaconAggregateAndProof.png)
 
-![Figure 14. Standard chart for the rest to Topics: voluntary_exit, proposer_slashing, attester_slashing](/charts/EmptyGraphForMessages.png)
+![Figure 14. Standard chart for the rest to Topics: voluntary_exit, proposer_slashing, attester_slashing](./charts/EmptyGraphForMessages.png)
 Note: No messages received on those topics.
 
 
