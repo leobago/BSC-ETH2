@@ -14,7 +14,7 @@ Armiarma is divided into two main parts:
 1. The Network Crawler. A slightly tuned Rumor version used to gather the information about  the GossipSub implementation and peers. 
 2. The Data Analysis. Used to analyze and plot the gathered metrics from the crawler.
 
-NOTE: Rumor is a tool that is currently in development. So that the Armiarma Implementation is constantly improving and adding new features or gathering new metrics from the network.
+*NOTE: Rumor is a tool that is currently in development. So that the Armiarma Implementation is constantly improving and adding new features or gathering new metrics from the network.*
 
 
 ## Metrics from Medalla Testnet
@@ -39,7 +39,7 @@ Once we have been connected to a peer, it records:
 - proposer_slashing
 - attester_slashing
 
-NOTE: The data used to generate the plots that will be shown below has been taken with the alpha version of the crawler (non optimized version). This plots and results will be updated with new ones once the code is merged with the [recent update of rumor](https://github.com/protolambda/rumor/commit/6549267e93d4f409731d0e59ae45863347b0b226)
+*NOTE: The data used to generate the plots that will be shown below has been taken with the alpha version of the crawler (non optimized version). This plots and results will be updated with new ones once the code is merged with the [recent update of rumor](https://github.com/protolambda/rumor/commit/6549267e93d4f409731d0e59ae45863347b0b226)*
 
 ## Results
 
@@ -52,22 +52,22 @@ On a deeper analysis of the received metrics, this is the data we have been able
 ![Figure 3. Number of peers connected to, filtered by client type.](./charts/PeersOnClients.png)
 
 ![Figure 4. Number of connections established with each peer.](./charts/NumberOfConnectionsPerPeer.png)
-Note: The connection events are one per each GossipSub Topic (Connected to 5 topics in total)
+*Note: The connection events are one per each GossipSub Topic (Connected to 5 topics in total)*
 
 ![Figure 5. Number of disconnections with each peer.](./charts/NumberOfDisconnectionsPerPeer.png)
-Note: The connection events are one per each GossipSub Topic (Connected to 5 topics in total)
+*Note: The connection events are one per each GossipSub Topic (Connected to 5 topics in total)*
 
-![Figure 6. Amount of time connected with each peer in milliseconds.](./charts/MillisecondsConnectedToPeers.png)
-Note: The total amount of time is the sum of the time connected to each GossipSub Topic (Connected to 5 topics in total)
+![Figure 6. Amount of time connected with each peer in milliseconds.](./charts/MinutesConnectedToPeers.png)
+*Note: The total amount of time is the sum of the time connected to each GossipSub Topic (Connected to 5 topics in total)*
 
 ![Figure 7. Average connections to peers from the different clients.](./charts/AverageConnectionsPerClientPeers.png)
-Note: The average was made from the total amount of connections shown previously.
+*Note: The average was made from the total amount of connections shown previously.*
 
 ![Figure 8. Average disconnections to peers from the different clients.](./charts/AverageDisconnectionPerClientPeers.png)
-Note: The average was made from the total amount of disconnections shown previously.
+*Note: The average was made from the total amount of disconnections shown previously.*
 
 ![Figure 9. Average time connected to peers from the different clients.](./charts/AverageTotalTimeConnectedToClientPeers.png)
-Note: The average was made from the total amount of time shown previously.
+*Note: The average was made from the total amount of time shown previously.*
 
 ![Figure 10. Number of messages received on the BeaconBlock topic from peers filtered by clients.](./charts/NumberOfMessagesReceivedBeaconBlock.png)
 
@@ -78,7 +78,7 @@ Note: The average was made from the total amount of time shown previously.
 ![Figure 13. Average of messages received on the BeaconAggregateAndProof topic from peers filtered by clients.](./charts/AverageMessagesReceivedBeaconAggregateAndProof.png)
 
 ![Figure 14. Standard chart for the rest to Topics: voluntary_exit, proposer_slashing, attester_slashing](./charts/EmptyGraphForMessages.png)
-Note: No messages received on those topics.
+*Note: No messages received on those topics.*
 
 
 ## Conclusion and Future Work
