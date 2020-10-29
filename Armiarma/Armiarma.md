@@ -14,6 +14,8 @@ Armiarma is divided into two main parts:
 1. The Network Crawler. A slightly tuned Rumor version used to gather the information about  the GossipSub implementation and peers.
 2. The Data Analysis. Used to analyze and plot the gathered metrics from the crawler.
 
+The data used to generate the charts was obtained from the Rumor modifications that the team did. [Link to the Rumor modified source code](https://github.com/Cortze/rumor/tree/armiarma/alpha0)
+
 *NOTE: Rumor is a tool that is currently in development. So that the Armiarma Implementation is constantly improving and adding new features or gathering new metrics from the network.*
 
 
