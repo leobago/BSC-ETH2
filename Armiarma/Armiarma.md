@@ -45,6 +45,8 @@ Once we have been connected to a peer, it records:
 
 On a deeper analysis of the received metrics, this is the data we have been able to collect and extract from the network.
 
+*NOTE: the data used for generating the following charts was gathered from the Armiarma crawler during few hours. The conclusions that can be obtained from this report might be bieased by the root nodes used on the dv5 protocol.*
+
 ![Figure 1. Comparison between the number of peers got from the dv5 and the ones connected to.](./charts/TotalPeersVsConnected.png)
 
 ![Figure 2. Total of peers connected to, filtered by countries.](./charts/PeersClassifiedByCountry.png)
