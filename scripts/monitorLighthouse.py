@@ -5,6 +5,8 @@ import sys
 import time
 import psutil
 import datetime
+from datetime import datetime as dt
+
 
 pid = int(sys.argv[1])
 print("Pid: "+str(pid))
@@ -23,13 +25,10 @@ def get_size(start_path = folderStorage):
 
     return total_size
 
-currentTime = datetime.datetime.now()
-print(currentTime)
-
 
 print("The size analyzed through the script is: ", get_size(), 'bytes')
 
-print("TIME [hh/mm/ss/ms], MEM [MB], CPU[%], NETOUT[MB], NETIN[MB], DiskUsage[MB]")
+print("TIME [month dd hh:mm:ss:ms], MEM [MB], CPU[%], NETOUT[MB], NETIN[MB], DiskUsage[MB]")
 
 while(1):
     try:
@@ -41,9 +40,8 @@ while(1):
         networkUsage = psutil.net_io_counters(pernic=True)
         sent_mb = networkUsage['eth0'][0] / 1000000
         received_mb = networkUsage['eth0'][1] / 1000000
-
-        
-        #SHOW TABLE
+        timestamp = datetime.datetime.now()
+        currentTime= timestamp.strftime("%B %d %H:%M:%S:%f")
         print(currentTime, ",", process.memory_info().rss/(1024*1024),",", cpuUsage,",", sent_mb,",", received_mb,",", diskUsageMB)
         time.sleep(1)
     except:
