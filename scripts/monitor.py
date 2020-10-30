@@ -22,9 +22,7 @@ def get_size(start_path = folderStorage):
 
     return total_size
 
-get_size()
 
-diskUsageMB=int(get_size()) /int(1000000)
 
 
 print("The size analyzed through the script is: ", get_size(), 'bytes')
@@ -35,6 +33,8 @@ print("MEM [MB], CPU[%], NETOUT[MB], NETIN[MB], DiskUsage[MB]")
 #print("{: >20} {: >20} {: >20} {: >20} {: >20}".format(*header_data))
 while(1):
     try:
+        get_size()
+        diskUsageMB=int(get_size()) /int(1000000)
         process = psutil.Process(pid)
         cpuUsage= psutil.cpu_percent(interval=1)
         networkUsage = psutil.net_io_counters(pernic=True)
