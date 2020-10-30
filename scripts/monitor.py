@@ -4,6 +4,7 @@ import os
 import sys
 import time
 import psutil
+import datetime
 
 pid = int(sys.argv[1])
 print("Pid: "+str(pid))
@@ -22,18 +23,20 @@ def get_size(start_path = folderStorage):
 
     return total_size
 
-
+currentTime = datetime.datetime.now()
+print(currentTime)
 
 
 print("The size analyzed through the script is: ", get_size(), 'bytes')
 
 
 #header_data = ['MEM [MB]', 'CPU[%]', 'NETOUT[MB]', 'NETIN[MB]', 'DiskUsage']
-print("MEM [MB], CPU[%], NETOUT[MB], NETIN[MB], DiskUsage[MB]")
+print("TIME [hh/mm/ss/ms], MEM [MB], CPU[%], NETOUT[MB], NETIN[MB], DiskUsage[MB]")
 #print("{: >20} {: >20} {: >20} {: >20} {: >20}".format(*header_data))
 while(1):
     try:
         get_size()
+        currentTime = datetime.datetime.now()
         diskUsageMB=int(get_size()) /int(1000000)
         process = psutil.Process(pid)
         cpuUsage= psutil.cpu_percent(interval=1)
@@ -53,7 +56,7 @@ while(1):
         
         #SHOW TABLE
         table_data = [process.memory_info().rss/(1024*1024), cpuUsage, sent_mb, received_mb, diskUsageMB] 
-        print(process.memory_info().rss/(1024*1024),",", cpuUsage,",", sent_mb,",", received_mb,",", diskUsageMB)
+        print(currentTime, ",", process.memory_info().rss/(1024*1024),",", cpuUsage,",", sent_mb,",", received_mb,",", diskUsageMB)
         time.sleep(1)
     except:
         print("Something went wrong")
