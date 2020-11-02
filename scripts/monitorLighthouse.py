@@ -44,6 +44,6 @@ while(1):
         print(currentTime, ",", process.memory_info().rss/(1024*1024),",", cpuUsage,",", sent_mb,",", received_mb,",", diskUsageMB)
         time.sleep(1)
     except:
-        print("Something went wrong")
+        print(currentTime, " , Error")
         #break
 print("Process with PID " + str(pid) + " is dead.")
