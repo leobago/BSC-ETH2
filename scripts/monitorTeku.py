@@ -33,7 +33,6 @@ print("TIME [hh/mm/ss/ms], MEM [MB], CPU[%], NETOUT[MB], NETIN[MB], DiskUsage[MB
 
 while(1):
     try:
-        get_size()
         currentTime = datetime.datetime.now()
         diskUsageMB=int(get_size()) /int(1000000)
         process = psutil.Process(pid)
@@ -48,5 +47,5 @@ while(1):
         time.sleep(1)
     except:
         print("Something went wrong")
-        break
+        #break
 print("Process with PID " + str(pid) + " is dead.")
