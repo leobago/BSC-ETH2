@@ -114,11 +114,11 @@ def getMetricsFromFile(clientType, inputFile):
         
         # Append values to the clientMetrics dict
         clientMetrics['TIME'].append(timeMins/60)
-        clientMetrics['MEM'].append(float(parameters[1]))
+        clientMetrics['MEM'].append(float(parameters[1]/1000))
         clientMetrics['CPU'].append(float(parameters[2]))
-        clientMetrics['NETOUT'].append(netOut)
-        clientMetrics['NETIN'].append(netIn)
-        clientMetrics['DISK'].append(float(parameters[5].replace('\n', '')))
+        clientMetrics['NETOUT'].append(netOut/1000)
+        clientMetrics['NETIN'].append(netIn/1000)
+        clientMetrics['DISK'].append((float(parameters[5].replace('\n', '')))/1000)
     
     
     metricsPanda = pd.DataFrame(data = clientMetrics, columns = ['TIME','MEM','CPU', 'NETOUT', 'NETIN', 'DISK'])
@@ -160,7 +160,7 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda):
     nimbusPanda.plot(ax=ax, x='TIME', y='NETIN', label='nimbus')
     prysmPanda.plot(ax=ax, x='TIME', y='NETIN', label='prysm')
     plt.xlabel("Time of syncing (hours)")
-    plt.ylabel("Network Incoming Traffic (MB)")
+    plt.ylabel("Network Incoming Traffic (GB)")
     plt.title("Network Incoming Traffic Comparison Between Clients")
     ax.grid(True)
     plt.legend()
@@ -174,7 +174,7 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda):
     nimbusPanda.plot(ax=ax, x='TIME', y='NETOUT', label='nimbus')
     prysmPanda.plot(ax=ax, x='TIME', y='NETOUT', label='prysm')
     plt.xlabel("Time of syncing (hours)")
-    plt.ylabel("Network Outcoming Traffic (MB)")
+    plt.ylabel("Network Outcoming Traffic (GB)")
     plt.title("Network Outcoming Traffic Comparison Between Clients")
     ax.grid(True)
     plt.legend()
@@ -188,7 +188,7 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda):
     nimbusPanda.plot(ax=ax, x='TIME', y='DISK', label='nimbus')
     prysmPanda.plot(ax=ax, x='TIME', y='DISK', label='prysm')
     plt.xlabel("Time of syncing (hours)")
-    plt.ylabel("Disk Usage (MB)")
+    plt.ylabel("Disk Usage (GB)")
     plt.title("Disk Usage Comparison Between Clients")
     ax.grid(True)
     plt.legend()

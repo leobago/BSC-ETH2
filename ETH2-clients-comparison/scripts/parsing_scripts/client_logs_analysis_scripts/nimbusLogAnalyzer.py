@@ -20,7 +20,7 @@ def main ():
     with open(csvFile, 'w') as csvf:  
         # creating a csv writer object  
         csvwriter = csv.writer(csvf)
-        csvwriter.writerow(["Time (min)", "Current Slot"])
+        csvwriter.writerow(["Time (hours)", "Current Slot"])
         
         # Iterate through the lines
         for line in logs:
@@ -40,8 +40,8 @@ def main ():
                 timeSecs = timeRaw.timestamp()
                 if simulationTime == 0:
                    simulationTime = timeSecs
-                
-                row = [float((timeSecs - simulationTime)/60), currentSlot]
+
+                row = [float((timeSecs - simulationTime)/(60*60)), currentSlot]
                 csvwriter.writerow(row)
 
     
