@@ -3,13 +3,14 @@ import re
 #from datetime import datetime
 from datetime import datetime
 import matplotlib.dates 
+from pathlib import Path
 import csv
 
 
 def main ():
     simulationTime = 0
-    logFile = sys.argv[1]
-    csvFile = sys.argv[2]
+    logFile = Path(__file__).parent / sys.argv[1]
+    csvFile = Path(__file__).parent / sys.argv[2]
 
     print("Opening Nimbus File")
     with open(logFile) as f:

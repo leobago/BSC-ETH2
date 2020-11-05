@@ -2,6 +2,7 @@ import sys
 import re
 #from datetime import datetime
 from datetime import datetime
+from pathlib import Path
 import csv
 
 
@@ -9,8 +10,8 @@ def main ():
     headSlot = 0
     CurrentSlot = 0
     simulationTime = 0
-    logFile = sys.argv[1]
-    csvFile = sys.argv[2]
+    logFile = Path(__file__).parent / sys.argv[1]
+    csvFile = Path(__file__).parent / sys.argv[2]
 
     with open(logFile) as f:
         logs = f.readlines()
