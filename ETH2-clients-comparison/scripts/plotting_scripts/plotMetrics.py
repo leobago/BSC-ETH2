@@ -17,18 +17,29 @@ def main ():
     nimbusFile = sys.argv[3]
     prysmFile = sys.argv[4]
     
-    # Generate panda from lighthouse
+    # Generate panda from lighthouse and create csv file
     lightPanda = getMetricsFromFile('lighthouse',lightFile)
     print("Lighthouse -> PandaObject : Done")
-    # Generate panda from teku
+    lightPanda.to_csv('../../data/client_metrics/lighthouseMetrics.csv')
+    print("Created lighthouseMetrics.csv in data/client_metrics")
+    
+    # Generate panda from teku and create csv file
     tekuPanda  = getMetricsFromFile('teku',tekuFile)
     print("Teku -> PandaObject : Done")
+    lightPanda.to_csv('../../data/client_metrics/tekuMetrics.csv')
+    print("Created tekuMetrics.csv in data/client_metrics")
     
+    # Generate panda from teku and create csv file
     nimbusPanda = getMetricsFromFile('nimbus', nimbusFile)
     print("Nimbus -> PandaObject : Done")
+    lightPanda.to_csv('../../data/client_metrics/nimbusMetrics.csv')
+    print("Created nimbusMetrics.csv in data/client_metrics")
     
+    # Generate panda from teku and create csv file
     prysmPanda = getMetricsFromFile('prysm', prysmFile)
     print("Prysm -> PandaObject : Done")
+    lightPanda.to_csv('../../data/client_metrics/prysmMetrics.csv')
+    print("Created nimbusMetrics.csv in data/client_metrics")
     
     print(lightPanda)
     print(tekuPanda)
