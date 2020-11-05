@@ -20,6 +20,7 @@ def main ():
     # Generate panda from lighthouse
     lightPanda = getMetricsFromFile('lighthouse',lightFile)
     print("Lighthouse -> PandaObject : Done")
+    lightPanda.to_csv(lighthouseMetrics.csv)
     # Generate panda from teku
     tekuPanda  = getMetricsFromFile('teku',tekuFile)
     print("Teku -> PandaObject : Done")
