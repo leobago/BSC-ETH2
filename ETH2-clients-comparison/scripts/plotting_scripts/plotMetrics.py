@@ -114,7 +114,7 @@ def getMetricsFromFile(clientType, inputFile):
         
         # Append values to the clientMetrics dict
         clientMetrics['TIME'].append(timeMins/60)
-        clientMetrics['MEM'].append(float(parameters[1]/1000))
+        clientMetrics['MEM'].append(float(parameters[1])/1000)
         clientMetrics['CPU'].append(float(parameters[2]))
         clientMetrics['NETOUT'].append(netOut/1000)
         clientMetrics['NETIN'].append(netIn/1000)
