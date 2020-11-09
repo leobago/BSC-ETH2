@@ -24,7 +24,6 @@ def get_size(start_path = folderStorage):
     return total_size
 
 currentTime = datetime.datetime.now()
-print(currentTime)
 
 
 print("The size analyzed through the script is: ", get_size(), 'bytes')
