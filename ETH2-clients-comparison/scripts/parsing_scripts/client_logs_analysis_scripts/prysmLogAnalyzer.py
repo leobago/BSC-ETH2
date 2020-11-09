@@ -20,12 +20,19 @@ def main ():
     with open(csvFile, 'w') as csvf:  
         # creating a csv writer object  
         csvwriter = csv.writer(csvf)
-        csvwriter.writerow(["Time (hours)", "Current Slot"])
+        csvwriter.writerow(["Time (hours)", "Current Slot", "Peers Connected"])
         
         # Iterate through the lines
         for line in logs:
              # remove whitespace characters like `\n` at the end of each line
             line.strip()
+            # get the starting time
+            if "Starting beacon node" in line:
+                firstSlice = line.split('"')
+                logTime = firstSlice[1]
+                timeRaw = datetime.strptime(logTime,'%Y-%m-%d %H:%M:%S')
+                simulationTime = timeRaw.timestamp()
+            
             if "Processing block" in line:
                 
                 # Get block
@@ -36,15 +43,15 @@ def main ():
                         for sslice in slices:
                             if '/' in sslice:
                                 currentSlot = sslice.split('/')[0]
+                            if 'peers' in sslice:
+                                peers = sslice.split('=')[1]
                 
                 # get the time
                 logTime = firstSlice[1]
                 timeRaw = datetime.strptime(logTime,'%Y-%m-%d %H:%M:%S')
                 timeSecs = timeRaw.timestamp()
-                if simulationTime == 0:
-                   simulationTime = timeSecs
                 
-                row = [float((timeSecs - simulationTime)/(60*60)), currentSlot]
+                row = [float((timeSecs - simulationTime)/(60*60)), currentSlot, peers]
                 csvwriter.writerow(row)
         
     print("Prysm CSV Done")
