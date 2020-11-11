@@ -45,6 +45,7 @@ def main ():
                         for sslice in slices:
                             if '...' in sslice:
                                 currentSlot = sslice.split('...')[1]
+                                currentSlot = int(currentSlot)/1000
                 
                 # get the time
                 logTime = firstSlice[0]

@@ -9,6 +9,10 @@ import csv
 
 def main ():
     simulationTime = 0
+    prevRawTime = 0
+    year = 0
+    month = 0
+    auxDay = 0
     logFile = Path(__file__).parent / sys.argv[1]
     csvFile = Path(__file__).parent / sys.argv[2]
 
@@ -29,16 +33,18 @@ def main ():
             # get the starting time from the beginning
             if simulationTime == 0:
                 # get the time
-                firstSlice = line.split(' | ')
+                firstSlice = line.split(' main ')
                 logTime = firstSlice[0]
-                logTime = logTime.replace('+01:00', '')
-                timeRaw = datetime.strptime(logTime,'%Y-%m-%d %H:%M:%S.%f')
+                timeRaw = datetime.strptime(logTime,'%Y-%m-%d %H:%M:%S,%f')
+                auxDay = timeRaw.day
+                month = timeRaw.month
+                year = timeRaw.year
                 timeSecs = timeRaw.timestamp()
                 simulationTime = timeSecs
             
             if "Sync Event" in line:
                 # Get slot
-                firstSlice = line.split(' | ')
+                firstSlice = line.split('[')
                 for slices in firstSlice:
                     sslices = slices.split(',')
                     for string in sslices:
@@ -55,13 +61,17 @@ def main ():
                 
                 # get the time
                 logTime = firstSlice[0]
-                logTime = logTime.replace('+01:00', '')
-                timeRaw = datetime.strptime(logTime,'%Y-%m-%d %H:%M:%S.%f')
+                logTime = logTime.replace(' INFO  - ', '')
+                timeRaw = datetime.strptime(logTime,'%H:%M:%S.%f').replace(year=year, month=month, day=auxDay)
+                if prevRawTime == 0:
+                    prevRawTime = timeRaw
+                if timeRaw.timestamp() < prevRawTime.timestamp():
+                    auxDay = auxDay + 1
+                    timeRaw = timeRaw.replace(day=auxDay)
                 timeSecs = timeRaw.timestamp()
-                #if simulationTime == 0:
-                #   simulationTime = timeSecs
+                prevRawTime = timeRaw    
                 
-                row = [float((timeSecs - simulationTime)/(60*60)), currentSlot, peers]
+                row = [float((timeSecs - simulationTime)/(60*60)), int(currentSlot)/1000, peers]
                 csvwriter.writerow(row)
         
     print("Teku CSV Done")

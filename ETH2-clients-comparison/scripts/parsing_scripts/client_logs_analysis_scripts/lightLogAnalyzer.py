@@ -73,7 +73,7 @@ def main ():
                     timeRaw = datetime.strptime(logTime, '%b %d %H:%M:%S.%f')
                     timeSecs = timeRaw.timestamp()
                 
-                row = [float((timeSecs - simulationTime)/(60*60)), currentSlot, peers]
+                row = [float((timeSecs - simulationTime)/(60*60)), int(currentSlot)/1000, peers]
                 csvwriter.writerow(row)
         
     print("Lighthouse CSV Done")

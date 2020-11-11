@@ -52,7 +52,7 @@ def main ():
                 timeRaw = datetime.strptime(logTime,'%Y-%m-%d %H:%M:%S.%f')
                 timeSecs = timeRaw.timestamp()
 
-                row = [float((timeSecs - simulationTime)/(60*60)), currentSlot, peers]
+                row = [float((timeSecs - simulationTime)/(60*60)), int(currentSlot)/1000, peers]
                 csvwriter.writerow(row)
 
     
