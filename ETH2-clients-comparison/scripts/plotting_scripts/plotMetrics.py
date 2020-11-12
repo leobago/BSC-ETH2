@@ -250,15 +250,15 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodesta
     # Lighthouse CPU-DISK
     plotCpuVS('lighthouse', lightPanda, 'TIME', 'CPU', 'TIME', 'DISK', "Lighthouse CPU Usage VS Disk Usage", "CPU Usage (%)", "Disk Usage (GB)", lightColor, SyncColor, 4, 2, fontSize)
     # Lighthouse CPU-NETIN
-    plotCpuVS('lighthouse', lightPanda, 'TIME', 'CPU', 'TIME', 'NETIN', "Lighthouse CPU Usage VS Network Incoming Traffic", "CPU Usage (%)", "Network Incoming Traffic (GB)", lightColor, SyncColor, 4, 2, fontSize+17)
+    plotCpuVS('lighthouse', lightPanda, 'TIME', 'CPU', 'TIME', 'NETIN', "Lighthouse CPU Usage VS Network Incoming Traffic", "CPU Usage (%)", "Network Incoming Traffic (GB)", lightColor, SyncColor, 4, 2, fontSize+20)
     # Lighthouse CPU-PEeRS
     plotCpuVS('lighthouse', lightPanda, 'TIME', 'CPU', 'TIME', 'Peers Connected', "Lighthouse CPU Usage VS Peers Connected", "CPU Usage (%)", "Peers Connected", lightColor, SyncColor, 4, 2, fontSize+20)
     # Lighthouse MEM-DISK
-    plotSyncVS('lighthouse', lightPanda, 'TIME', 'MEM', 'TIME', 'DISK', "Lighthouse System Memory Usage VS Disk Usage", "System Memory Used (MB)", "Disk Usage (GB)", lightColor, SyncColor, 4, 2, fontSize)
+    plotSyncVS('lighthouse', lightPanda, 'TIME', 'MEM', 'TIME', 'DISK', "Lighthouse System Memory Usage VS Disk Usage", "System Memory Used (GB)", "Disk Usage (GB)", lightColor, SyncColor, 4, 2, fontSize)
     # Lighthouse DISK-NETIN
     plotSyncVS('lighthouse', lightPanda, 'TIME', 'DISK', 'TIME', 'NETIN', "Lighthouse Disk Usage VS Network Incoming Traffic", "Disk Usage (GB)", "Network Incoming Traffic (GB)", lightColor, SyncColor, 4, 2, fontSize)
     # Lighthouse MEM-NETOUT
-    plotSyncVS('lighthouse', lightPanda, 'TIME', 'MEM', 'TIME', 'NETOUT', "Lighthouse System Memory Usage VS Network Outcoming Traffic", "System Memory Used (MB)", "Network Outcoming Traffic (GB)", lightColor, SyncColor, 4, 2, fontSize)
+    plotSyncVS('lighthouse', lightPanda, 'TIME', 'MEM', 'TIME', 'NETOUT', "Lighthouse System Memory Usage VS Network Outcoming Traffic", "System Memory Used (GB)", "Network Outcoming Traffic (GB)", lightColor, SyncColor, 4, 2, fontSize)
     
     # Prysm CPU-NETIN
     plotCpuVS('prysm', prysmPanda, 'TIME', 'CPU', 'TIME', 'NETIN', "Prysm CPU Usage VS Network Incoming Traffic", "CPU Usage (%)", "Network Incoming Traffic (GB)", PrysmColor, SyncColor, 4, 2, fontSize)
@@ -267,11 +267,11 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodesta
      
      
     # Plot MEM-SYNC on the 5 clients
-    plotSyncVS('lighthouse', lightPanda, 'TIME', 'MEM', 'TIME', 'Current Slot', "Lighthouse System Memory Usage VS Chain Synchronization", "System Memory Used (MB)", "Last synced slot (thousands)", lightColor, SyncColor, 4, 2, fontSize)
-    plotSyncVS('teku', tekuPanda, 'TIME', 'MEM', 'TIME', 'Current Slot', "Teku System Memory Usage VS Chain Synchronization", "System Memory Used (MB)", "Last synced slot  (thousands)" , tekuColor, SyncColor, 4, 2, fontSize)
-    plotSyncVS('nimbus', nimbusPanda, 'TIME', 'MEM', 'TIME', 'Current Slot', "Nimbus System Memory Usage VS Chain Synchronization", "System Memory Used (MB)", "Last synced slot (thousands)" , NimbusColor, SyncColor, 4, 2, fontSize)
-    plotSyncVS('prysm', prysmPanda, 'TIME', 'MEM', 'TIME', 'Current Slot', "Prysm System Memory Usage VS Chain Synchronization", "System Memory Used (MB)", "Last synced slot (thousands)", PrysmColor, SyncColor , 4, 2, fontSize)
-    plotSyncVS('lodestar', lodestarPanda, 'TIME', 'MEM', 'TIME', 'Current Slot', "Lodestar System Memory Usage VS Chain Synchronization", "System Memory Used (MB)", "Last synced slot (thousands)" , LodestarColor, SyncColor, 4, 2, fontSize)
+    plotSyncVS('lighthouse', lightPanda, 'TIME', 'MEM', 'TIME', 'Current Slot', "Lighthouse System Memory Usage VS Chain Synchronization", "System Memory Used (GB)", "Last synced slot (thousands)", lightColor, SyncColor, 4, 2, fontSize)
+    plotSyncVS('teku', tekuPanda, 'TIME', 'MEM', 'TIME', 'Current Slot', "Teku System Memory Usage VS Chain Synchronization", "System Memory Used (GB)", "Last synced slot  (thousands)" , tekuColor, SyncColor, 4, 2, fontSize)
+    plotSyncVS('nimbus', nimbusPanda, 'TIME', 'MEM', 'TIME', 'Current Slot', "Nimbus System Memory Usage VS Chain Synchronization", "System Memory Used (GB)", "Last synced slot (thousands)" , NimbusColor, SyncColor, 4, 2, fontSize)
+    plotSyncVS('prysm', prysmPanda, 'TIME', 'MEM', 'TIME', 'Current Slot', "Prysm System Memory Usage VS Chain Synchronization", "System Memory Used (GB)", "Last synced slot (thousands)", PrysmColor, SyncColor , 4, 2, fontSize)
+    plotSyncVS('lodestar', lodestarPanda, 'TIME', 'MEM', 'TIME', 'Current Slot', "Lodestar System Memory Usage VS Chain Synchronization", "System Memory Used (GB)", "Last synced slot (thousands)" , LodestarColor, SyncColor, 4, 2, fontSize)
   
     # Plot CPU-SYNC on the 5 clients
     plotCpuVS('lighthouse', lightPanda, 'TIME', 'CPU', 'TIME', 'Current Slot', "Lighthouse CPU Usage VS Chain Synchronization", "CPU Usage (%)", "Last synced slot (thousands)", lightColor, SyncColor , 2, 2, fontSize)
@@ -339,7 +339,7 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodesta
     
     # Plot 5 client MEM on the same graph
     plotAllClients(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda, 
-              'TIME', 'MEM', 'TIME', 'Current Slot', "System Memory Usage VS Chain Synchronization. Comparison Between Clients", "System Memory Used by the client (MB)", "Last synced slot (thousands)", 1, fontSize)
+              'TIME', 'MEM', 'TIME', 'Current Slot', "System Memory Usage VS Chain Synchronization. Comparison Between Clients", "System Memory Used (GB)", "Last synced slot (thousands)", 1, fontSize)
 
     
     # Plot 5 client CPU on the same graph
@@ -363,11 +363,11 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodesta
     
     # Plot 5 client NETIN-PEERS on the same graph
     plotAllClients(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda, 
-              'TIME', 'NETIN', 'TIME', 'Peers Connected', "Network Incoming Traffic VS Peers Connected. Comparison Between Clients", "Network Incoming Traffic (GB) (GB)", "Peers Connected", 1, fontSize)
+              'TIME', 'NETIN', 'TIME', 'Peers Connected', "Network Incoming Traffic VS Peers Connected. Comparison Between Clients", "Network Incoming Traffic (GB)", "Peers Connected", 1, fontSize)
     
     # Plot 5 client NETOUT-PEERS on the same graph
     plotAllClients(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda, 
-              'TIME', 'NETOUT', 'TIME', 'Peers Connected', "Network Outcoming Traffic VS Peers Connected. Comparison Between Clients", "Network Outcoming Traffic (GB) (GB)", "Peers Connected", 1, fontSize)
+              'TIME', 'NETOUT', 'TIME', 'Peers Connected', "Network Outcoming Traffic VS Peers Connected. Comparison Between Clients", "Network Outcoming Traffic (GB)Me", "Peers Connected", 1, fontSize)
     
     
     # Plot 5 client PEERS on the same graph
@@ -477,6 +477,7 @@ def plotCpuVS(clientName, pandaClientMetrics, xMetrics, yMetrics, xSync, ySync, 
     ax1.set_xlabel("Time of syncing (hours)", fontsize = size)
     ax1.xaxis.set_ticks(np.arange(0, pandaClientMetrics[xSync].iloc[-1]+1, 6.0))
     plt.title(title, fontsize = size)
+    plt.tight_layout()
     plt.tight_layout()
     plt.savefig(figurePath)
     #plt.show()
