@@ -62,7 +62,7 @@ def main ():
         print("Created lighthouseMetrics.csv in data/Lighthouse")
         
         addPeersSlotsToPanda(tekuPanda, tekuSyncPanda, 'TIME', 'Time (hours)', 'Current Slot', 'Peers Connected')
-        tekuP = Path(__file__).parent / '../../data/Teku/tekuMetrics.csv' 
+        tekuP = Path(__file__).parent / '../../data/Teku/tekuMetrics3.csv' 
         tekuPanda.to_csv(tekuP)
         print("Created tekuMetrics.csv in data/Teku")
         
@@ -95,13 +95,25 @@ def main ():
         prysmPanda = pd.read_csv(prysmFile)
         lodestarPanda = pd.read_csv(lodestarFile)
         
+    elif csvORlogs == 'teku':
+        teku1File = Path(__file__).parent / sys.argv[2]
+        teku2File = Path(__file__).parent / sys.argv[3]
+        
+        teku1Panda = pd.read_csv(teku1File) 
+        print(sys.argv[2], 'Loaded!')
+        teku2Panda = pd.read_csv(teku2File)
+        print(sys.argv[3], 'Loaded!')
+        
+        
     else:
         print("csv or logs must be specified on the first argument")
         exit()
     
     # Plot
-    plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda)
-
+    if csvORlogs != 'teku':
+        plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda)
+    else: 
+        plotTeku1vsTeku2(teku1Panda, teku2Panda,  'Current Slot', 'DISK' , 'Disk Usage on Teku Syncing in Different Time Moments', 'Disk Usage (GB)', 'Last Synced Slot', 1, 20)
     print("Script Done!")
     
     
@@ -234,6 +246,35 @@ def getMetricsFromFile(clientType, inputFile):
     
     metricsPanda = pd.DataFrame(data = clientMetrics, columns = ['TIME','MEM','CPU', 'NETOUT', 'NETIN', 'DISK'])
     return metricsPanda
+
+def plotTeku1vsTeku2(teku1, teku2, xMetrics, yMetrics, title, ylabel, xlabel, loc, size):
+    outfile = '../../figures/metrics_plots/' + 'Teku' + yMetrics + '-' + xMetrics + 'Comparison.png'
+    figurePath =  Path(__file__).parent / outfile
+    
+    label1 = 'Teku 1' + ' ' + yMetrics
+    label2 = 'Teku 2' +  ' ' + yMetrics
+    
+    fig = plt.figure(figsize=(20,10))
+    ax1 = fig.add_subplot(111)
+    teku1.plot(ax=ax1, x=xMetrics, y=yMetrics,  marker='.', markersize=0.05, label=label1)
+    teku2.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.05, label=label2)
+
+    ax1.set_ylabel(ylabel, fontsize = size)
+    ax1.set_ylim(bottom=0)
+    ax1.tick_params(axis='y', labelsize = size)
+    ax1.tick_params(axis='x', labelsize = size)
+    l1 = ax1.legend(markerscale=10, loc=loc, ncol=1, prop={'size':size})
+    
+    #ax1.legend(handles=[l1, l2], title='Legend', bbox_to_anchor=(1.05, 1), loc='upper left', prop={'size':size})
+    #bbox_to_anchor=(1,0), loc="lower right"
+    
+    ax1.grid(which='major', axis='x', linestyle='--')
+    ax1.set_xlabel(xlabel, fontsize = size)
+    #ax1.xaxis.set_ticks(np.arange(0, teku1[xMetrics].iloc[-1]+1, 6.0))
+    plt.title(title, fontsize = size)
+    plt.tight_layout()
+    plt.savefig(figurePath)
+    plt.show()
     
 def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda):
     lightColor = 'tab:blue'
