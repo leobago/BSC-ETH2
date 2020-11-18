@@ -535,16 +535,16 @@ def plotCpuVS(clientName, pandaClientMetrics, xMetrics, yMetrics, xSync, ySync, 
     plt.savefig(figurePath)
     #plt.show()
     
-def plotAllClients(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics, yMetrics, xSync, ySync, title, y1label, y2label, ncol, size):
+def plotAllClients(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics, yMetrics, xSync, ySync, title, y1label, y2label, loc, size):
         
     outfile = '../../figures/metrics_plots/' + 'Clients' + yMetrics + '-' + ySync+ '.png'
     figurePath =  Path(__file__).parent / outfile
     
-    label1 = 'Lighthouse' + ' ' + yMetrics
-    label2 = 'Teku' +  ' ' + yMetrics
-    label3 = 'Nimbus' +  ' ' + yMetrics 
-    label4 = 'Prysm' +  ' ' + yMetrics 
-    label5 = 'Lodestar' +  ' ' + yMetrics 
+    label1 = 'Lighthouse'
+    label2 = 'Teku'
+    label3 = 'Nimbus' 
+    label4 = 'Prysm'
+    label5 = 'Lodestar' 
     
     fig = plt.figure(figsize=(10,6))
     ax1 = fig.add_subplot(111)
@@ -553,12 +553,6 @@ def plotAllClients(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics, yMetrics
     nimbus1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.2, label=label3)
     prysm1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.2, label=label4)
     lodestar1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.2, label=label5)
-    
-    label1 = 'Lighthouse' + ' ' + ySync
-    label2 = 'Teku' +  ' ' + ySync
-    label3 = 'Nimbus' +  ' ' + ySync 
-    label4 = 'Prysm' +  ' ' + ySync 
-    label5 = 'Lodestar' +  ' ' + ySync 
     
     ax12 = ax1.twinx()
     light1.plot(ax=ax12, x=xSync, y=ySync, style='.', marker='.', markersize=0.1, label=label1)
@@ -571,8 +565,8 @@ def plotAllClients(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics, yMetrics
     ax1.set_ylim(bottom=0)
     ax1.tick_params(axis='y', labelsize = size)
     ax1.tick_params(axis='x', labelsize = size)
-    ax1.get_legend().remove()
-    #l1 = ax1.legend(markerscale=10, loc=1, ncol=ncol, prop={'size':size})
+    #ax1.get_legend().remove()
+    l1 = ax1.legend(markerscale=10, loc=loc, ncol=1, prop={'size':size})
     
     ax12.set_ylabel(y2label, fontsize = size)
     ax12.set_ylim(bottom=0)
@@ -651,8 +645,8 @@ def plotAllClientsOnlySlot(light1, teku1, nimbus1, prysm1, lodestar1, sliceRange
     ax1.set_ylim(bottom=0)
     ax1.tick_params(axis='y', labelsize = size)
     ax1.tick_params(axis='x', labelsize = size)
-    ax1.get_legend().remove()
-    #l1 = ax1.legend(markerscale=10, loc=loc, ncol=1, prop={'size':size})
+    #ax1.get_legend().remove()
+    l1 = ax1.legend(markerscale=10, loc=loc, ncol=1, prop={'size':size})
     
     #ax1.legend(handles=[l1, l2], title='Legend', bbox_to_anchor=(1.05, 1), loc='upper left', prop={'size':size})
     #bbox_to_anchor=(1,0), loc="lower right"
