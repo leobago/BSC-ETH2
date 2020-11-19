@@ -422,6 +422,9 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodesta
     
     # Plot 5 client Sync on the same graph
     plotAllClientsOnly(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda,'TIME', 'Current Slot', "Chain Synchronization. Comparison Between Clients", "Current Slot (thousands)", 4, fontSize)
+    
+    # Plot 5 client Sync on the same graph
+    plotAllClientsOnlyRange(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda,'TIME', 'Current Slot', 12, 150, "Chain Synchronization. Comparison Between Clients", "Current Slot (thousands)", 4, fontSize)
 
     # Plot 5 client DISK-SLOT (On X axis) on the same graph
     plotAllClientsOnlySlot(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda, "Range", 'Current Slot', 'DISK',  "Disk Usage Based on Last Synced Slot. Comparison Between Clients", "Disk Usage (GB)", 1, fontSize)
@@ -696,6 +699,50 @@ def plotAllClientsOnly(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics, yMet
     ax1.grid(which='major', axis='x', linestyle='--')
     ax1.set_xlabel("Time of syncing (hours)", fontsize = size)
     ax1.xaxis.set_ticks(np.arange(0, prysm1[xMetrics].iloc[-1]+1, 6.0))
+    plt.title(title, fontsize = size)
+    plt.tight_layout()
+    plt.savefig(figurePath)
+    #plt.show()
+
+def plotAllClientsOnlyRange(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics, yMetrics, xLimit, yLimit, title, y1label, loc, size):
+        
+    outfile = '../../figures/metrics_plots/' + 'Clients' + yMetrics + 'Ranged.png'
+    figurePath =  Path(__file__).parent / outfile
+    
+    label1 = 'Lighthouse'
+    label2 = 'Teku'
+    label3 = 'Nimbus' 
+    label4 = 'Prysm'
+    label5 = 'Lodestar'
+    
+    fig = plt.figure(figsize=(10,6))
+    ax1 = fig.add_subplot(111)
+    light1.plot(ax=ax1, x=xMetrics, y=yMetrics,  marker='.', markersize=0.05, label=label1)
+    teku1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.05, label=label2)
+    nimbus1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.05, label=label3)
+    prysm1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.05, label=label4)
+    lodestar1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.05, label=label5)
+
+    ax1.set_ylabel(y1label, fontsize = size)
+    ax1.set_xbound(lower=0, upper=xLimit)
+    ax1.set_xlim(emit=True, left=0, right=xLimit)
+    ax1.set_ylim(bottom=0, top=yLimit)
+    llimit, rlimit = ax1.get_xlim()
+    ax1.tick_params(axis='y', labelsize = size)
+    ax1.tick_params(axis='x', labelsize = size)
+    #ax1.get_legend().remove()
+    l1 = ax1.legend(markerscale=10, loc=loc, ncol=1, prop={'size':size-3})
+    
+    #ax1.legend(handles=[l1, l2], title='Legend', bbox_to_anchor=(1.05, 1), loc='upper left', prop={'size':size})
+    #bbox_to_anchor=(1,0), loc="lower right"
+    
+    if (xMetrics == 'TIME' or xMetrics == 'Current Slot'):
+    	ax1.axhline(y=73.349, color='r', linestyle='--')
+    	ax1.axhline(y=117.944, color='r', linestyle='--')
+    
+    ax1.grid(which='major', axis='both', linestyle='--')
+    ax1.set_xlabel("Time of syncing (hours)", fontsize = size)
+    #ax1.xaxis.set_ticks(np.arange(0, prysm1[xMetrics].iloc[-1]+1, 6.0))
     plt.title(title, fontsize = size)
     plt.tight_layout()
     plt.savefig(figurePath)
