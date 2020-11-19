@@ -396,7 +396,7 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodesta
     
     # Plot 5 client NETIN on the same graph
     plotAllClientsOnly(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda, 
-              'TIME', 'NETIN', "Network Incoming Traffic VS Chain Synchronization. Comparison Between Clients", "Network Incoming Traffic (GB)", 2, fontSize)
+              'TIME', 'NETIN', "Network Incoming Traffic. Comparison Between Clients", "Network Incoming Traffic (GB)", 2, fontSize)
     
     
     # Plot 5 client NETOUT on the same graph
