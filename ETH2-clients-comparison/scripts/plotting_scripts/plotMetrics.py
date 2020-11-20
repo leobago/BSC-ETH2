@@ -249,6 +249,7 @@ def getMetricsFromFile(clientType, inputFile):
 
 def plotTeku1vsTeku2(teku1, teku2, xMetrics, yMetrics, title, ylabel, xlabel, loc, size):
     outfile = '../../figures/metrics_plots/' + 'teku' + yMetrics + '-' + xMetrics + 'Comparison.png'
+    outfile = outfile.replace(' ', '_')
     figurePath =  Path(__file__).parent / outfile
     
     label1 = 'Teku 1'
@@ -280,7 +281,7 @@ def plotTeku1vsTeku2(teku1, teku2, xMetrics, yMetrics, title, ylabel, xlabel, lo
     plt.title(title, fontsize = size)
     plt.tight_layout()
     plt.savefig(figurePath)
-    plt.show()
+    #plt.show()
     
 def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda):
     lightColor = 'tab:blue'
@@ -298,6 +299,8 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodesta
     plotCpuVS('lighthouse', lightPanda, 'TIME', 'CPU', 'TIME', 'DISK', "Lighthouse CPU Usage VS Disk Usage", "CPU Usage (%)", "Disk Usage (GB)", lightColor, SyncColor, 4, 2, fontSize)
     # Lighthouse CPU-NETIN
     plotCpuVS('lighthouse', lightPanda, 'TIME', 'CPU', 'TIME', 'NETIN', "Lighthouse CPU Usage VS Network Incoming Traffic", "CPU Usage (%)", "Network Incoming Traffic (GB)", lightColor, SyncColor, 4, 2, fontSize)
+    # Lighthouse CPU-MEM
+    plotCpuVS('lighthouse', lightPanda, 'TIME', 'CPU', 'TIME', 'MEM', "Lighthouse CPU Usage VS System Memory Usage", "CPU Usage (%)", "System Memory Used(GB)", lightColor, SyncColor, 4, 2, fontSize)
     # Lighthouse CPU-PEeRS
     plotCpuVS('lighthouse', lightPanda, 'TIME', 'CPU', 'TIME', 'Peers Connected', "Lighthouse CPU Usage VS Peers Connected", "CPU Usage (%)", "Peers Connected", lightColor, SyncColor, 4, 2, fontSize)
     # Lighthouse MEM-DISK
@@ -305,13 +308,15 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodesta
     # Lighthouse DISK-NETIN
     plotSyncVS('lighthouse', lightPanda, 'TIME', 'DISK', 'TIME', 'NETIN', "Lighthouse Disk Usage VS Network Incoming Traffic", "Disk Usage (GB)", "Network Incoming Traffic (GB)", lightColor, SyncColor, 4, 2, fontSize)
     # Lighthouse MEM-NETOUT
-    plotSyncVS('lighthouse', lightPanda, 'TIME', 'MEM', 'TIME', 'NETOUT', "Lighthouse System Memory Usage VS Network Outcoming Traffic", "System Memory Used (GB)", "Network Outcoming Traffic (GB)", lightColor, SyncColor, 4, 2, fontSize)
+    plotSyncVS('lighthouse', lightPanda, 'TIME', 'MEM', 'TIME', 'NETOUT', "Lighthouse System Memory Usage VS Network Outgoing Traffic", "System Memory Used (GB)", "Network Outgoing Traffic (GB)", lightColor, SyncColor, 4, 2, fontSize)
     
     # Prysm CPU-NETIN
     plotCpuVS('prysm', prysmPanda, 'TIME', 'CPU', 'TIME', 'NETIN', "Prysm CPU Usage VS Network Incoming Traffic", "CPU Usage (%)", "Network Incoming Traffic (GB)", PrysmColor, SyncColor, 4, 2, fontSize)
     # Lodestar CPU-NETOUT
-    plotCpuVS('lodestar', lodestarPanda, 'TIME', 'CPU', 'TIME', 'NETOUT', "Lodestar CPU Usage VS Network Outcoming Traffic", "CPU Usage (%)", "Network Outcoming Traffic (GB)", LodestarColor, SyncColor, 4, 2, fontSize)
-     
+    plotCpuVS('lodestar', lodestarPanda, 'TIME', 'CPU', 'TIME', 'NETOUT', "Lodestar CPU Usage VS Network Outgoing Traffic", "CPU Usage (%)", "Network Outgoing Traffic (GB)", LodestarColor, SyncColor, 4, 2, fontSize)
+    
+    # Nimbus CPU-Sync
+    plotCpuVS('nimbus', nimbusPanda, 'TIME', 'CPU', 'TIME', 'Current Slot', "Nimbus CPU Usage VS Syncing", "CPU Usage (%)", "Last synced slot (thousands)", NimbusColor, SyncColor, 4, 2, fontSize)
      
     # Plot MEM-SYNC on the 5 clients
     plotSyncVS('lighthouse', lightPanda, 'TIME', 'MEM', 'TIME', 'Current Slot', "Lighthouse System Memory Usage VS Chain Synchronization", "System Memory Used (GB)", "Last synced slot (thousands)", lightColor, SyncColor, 4, 2, fontSize)
@@ -335,11 +340,11 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodesta
     plotSyncVS('lodestar', lodestarPanda, 'TIME', 'NETIN', 'TIME', 'Current Slot', "Lodestar Network Incoming Traffic VS Chain Synchronization", "Network Incoming Traffic (GB)", "Last synced slot (thousands)", LodestarColor, SyncColor, 2, 2, fontSize)
     
     # Plot NETOUT-SYNC on the 5 clients
-    plotSyncVS('lighthouse', lightPanda, 'TIME', 'NETOUT', 'TIME', 'Current Slot', "Lighthouse Network Outcoming Traffic VS Chain Synchronization", "Network Outcoming Traffic (GB)", "Last synced slot (thousands)" , lightColor, SyncColor, 2, 2, fontSize)
-    plotSyncVS('teku', tekuPanda, 'TIME', 'NETOUT', 'TIME', 'Current Slot', "Teku Network Outcoming Traffic VS Chain Synchronization", "Network IncomiOutcomingng Traffic (GB)", "Last synced slot (thousands)", tekuColor, SyncColor, 2, 2, fontSize )
-    plotSyncVS('nimbus', nimbusPanda, 'TIME', 'NETOUT', 'TIME', 'Current Slot', "Nimbus Network Outcoming Traffic VS Chain Synchronization", "Network Outcoming Traffic (GB)", "Last synced slot (thousands)" , NimbusColor, SyncColor, 2, 2, fontSize)
-    plotSyncVS('prysm', prysmPanda, 'TIME', 'NETOUT', 'TIME', 'Current Slot', "Prysm Network Outcoming Traffic VS Chain Synchronization", "Network Outcoming Traffic (GB)", "Last synced slot (thousands)" , PrysmColor, SyncColor, 2, 2, fontSize)
-    plotSyncVS('lodestar', lodestarPanda, 'TIME', 'NETOUT', 'TIME', 'Current Slot', "Lodestar Network Outcoming Traffic VS Chain Synchronization", "Network Outcoming Traffic (GB)", "Last synced slot (thousands)" , LodestarColor, SyncColor, 2, 2, fontSize)
+    plotSyncVS('lighthouse', lightPanda, 'TIME', 'NETOUT', 'TIME', 'Current Slot', "Lighthouse Network Outgoing Traffic VS Chain Synchronization", "Network Outgoing Traffic (GB)", "Last synced slot (thousands)" , lightColor, SyncColor, 2, 2, fontSize)
+    plotSyncVS('teku', tekuPanda, 'TIME', 'NETOUT', 'TIME', 'Current Slot', "Teku Network Outgoing Traffic VS Chain Synchronization", "Network Outgoing Traffic (GB)", "Last synced slot (thousands)", tekuColor, SyncColor, 2, 2, fontSize )
+    plotSyncVS('nimbus', nimbusPanda, 'TIME', 'NETOUT', 'TIME', 'Current Slot', "Nimbus Network Outgoing Traffic VS Chain Synchronization", "Network Outgoing Traffic (GB)", "Last synced slot (thousands)" , NimbusColor, SyncColor, 2, 2, fontSize)
+    plotSyncVS('prysm', prysmPanda, 'TIME', 'NETOUT', 'TIME', 'Current Slot', "Prysm Network Outgoing Traffic VS Chain Synchronization", "Network Outgoing Traffic (GB)", "Last synced slot (thousands)" , PrysmColor, SyncColor, 2, 2, fontSize)
+    plotSyncVS('lodestar', lodestarPanda, 'TIME', 'NETOUT', 'TIME', 'Current Slot', "Lodestar Network Outgoing Traffic VS Chain Synchronization", "Network Outgoing Traffic (GB)", "Last synced slot (thousands)" , LodestarColor, SyncColor, 2, 2, fontSize)
     
     # Plot DISK-SYNC on the 5 clients
     plotSyncVS('lighthouse', lightPanda, 'TIME', 'DISK', 'TIME', 'Current Slot', "Lighthouse Disk Usage VS Chain Synchronization", "Disk Usage (GB)", "Last synced slot (thousands)" , lightColor, SyncColor, 4, 2, fontSize)
@@ -363,11 +368,11 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodesta
     plotCpuVS('lodestar', lodestarPanda, 'TIME', 'CPU', 'TIME', 'NETIN', "Lodestar CPU Usage VS Network Incoming Traffic", "CPU Usage (%)", "Network Incoming Traffic (GB)", LodestarColor, SyncColor, 2, 2, fontSize)
     
     # Plot CPU-NETOUT on the 5 clients
-    plotCpuVS('lighthouse', lightPanda, 'TIME', 'CPU', 'TIME', 'NETOUT', "Lighthouse CPU Usage VS Network Outcoming Traffic", "CPU Usage (%)", "Network Outcoming Traffic (GB)", lightColor, SyncColor , 2, 2, fontSize)
-    plotCpuVS('teku', tekuPanda, 'TIME', 'CPU','TIME', 'NETOUT', "Teku CPU Usage VS Network Outcoming Traffic", "CPU Usage (%)", "Network Outcoming Traffic (GB)" , tekuColor, SyncColor, 4, 2, fontSize)
-    plotCpuVS('nimbus', nimbusPanda, 'TIME', 'CPU', 'TIME', 'NETOUT', "Nimbus CPU Usage VS Network Outcoming Traffic", "CPU Usage (%)", "Network Outcoming Traffic (GB)", NimbusColor, SyncColor , 4, 2, fontSize)
-    plotCpuVS('prysm', prysmPanda, 'TIME', 'CPU', 'TIME', 'NETOUT', "Prysm CPU Usage VS Network Outcoming Traffic", "CPU Usage (%)", "Network Outcoming Traffic (GB)" , PrysmColor, SyncColor, 2, 2, fontSize)
-    plotCpuVS('lodestar', lodestarPanda, 'TIME', 'CPU', 'TIME', 'NETOUT', "Lodestar CPU Usage VS Network Outcoming Traffic", "CPU Usage (%)", "Network Outcoming Traffic (GB)", LodestarColor, SyncColor, 2, 2, fontSize)
+    plotCpuVS('lighthouse', lightPanda, 'TIME', 'CPU', 'TIME', 'NETOUT', "Lighthouse CPU Usage VS Network Outgoing Traffic", "CPU Usage (%)", "Network Outgoing Traffic (GB)", lightColor, SyncColor , 2, 2, fontSize)
+    plotCpuVS('teku', tekuPanda, 'TIME', 'CPU','TIME', 'NETOUT', "Teku CPU Usage VS Network Outgoing Traffic", "CPU Usage (%)", "Network outgoing Traffic (GB)" , tekuColor, SyncColor, 4, 2, fontSize)
+    plotCpuVS('nimbus', nimbusPanda, 'TIME', 'CPU', 'TIME', 'NETOUT', "Nimbus CPU Usage VS Network Outgoing Traffic", "CPU Usage (%)", "Network Outgoing Traffic (GB)", NimbusColor, SyncColor , 4, 2, fontSize)
+    plotCpuVS('prysm', prysmPanda, 'TIME', 'CPU', 'TIME', 'NETOUT', "Prysm CPU Usage VS Network Outgoing Traffic", "CPU Usage (%)", "Network Outgoing Traffic (GB)" , PrysmColor, SyncColor, 2, 2, fontSize)
+    plotCpuVS('lodestar', lodestarPanda, 'TIME', 'CPU', 'TIME', 'NETOUT', "Lodestar CPU Usage VS Network Outgoing Traffic", "CPU Usage (%)", "Network Outgoing Traffic (GB)", LodestarColor, SyncColor, 2, 2, fontSize)
     
     # Plot NETIN-PEERS on the 5 clients
     plotPeersVS('lighthouse', lightPanda, 'TIME', 'NETIN', 'TIME', 'Peers Connected', "Lighthouse Network Incoming Traffic VS Peers Connected", "Network Incoming Traffic (GB)", "Peers Connected", lightColor, PeersColor , 4, 2, fontSize)
@@ -377,62 +382,65 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodesta
     plotPeersVS('lodestar', lodestarPanda, 'TIME', 'NETIN', 'TIME', 'Peers Connected', "Lodestar Network Incoming Traffic VS Peers Connected", "Network Incoming Traffic (GB)", "Peers Connected" , LodestarColor, PeersColor, 2, 2, fontSize)
     
     # Plot NETOUT-PEERS on the 5 clients
-    plotPeersVS('lighthouse', lightPanda, 'TIME', 'NETOUT', 'TIME', 'Peers Connected', "Lighthouse Network Outcoming Traffic VS Chain Peers Connected", "Network Outcoming Traffic (GB)", "Peers Connected", lightColor, PeersColor , 4, 2, fontSize)
-    plotPeersVS('teku', tekuPanda, 'TIME', 'NETOUT', 'TIME', 'Peers Connected', "Teku Network Outcoming Traffic VS Chain Peers Connected", "Network IncomiOutcomingng Traffic (GB)", "Peers Connected", tekuColor, PeersColor , 4, 2, fontSize)
-    plotPeersVS('nimbus', nimbusPanda, 'TIME', 'NETOUT', 'TIME', 'Peers Connected', "Nimbus Network Outcoming Traffic VS Peers Connected", "Network Outcoming Traffic (GB)", "Peers Connected" , NimbusColor, PeersColor, 4, 2, fontSize)
-    plotPeersVS('prysm', prysmPanda, 'TIME', 'NETOUT', 'TIME', 'Peers Connected', "Prysm Network Outcoming Traffic VS Peers Connected", "Network Outcoming Traffic (GB)", "Peers Connected" , PrysmColor, PeersColor, 4, 2, fontSize)
-    plotPeersVS('lodestar', lodestarPanda, 'TIME', 'NETOUT', 'TIME', 'Peers Connected', "Lodestar Network Outcoming Traffic VS Peers Connected", "Network Outcoming Traffic (GB)", "Peers Connected" , LodestarColor, PeersColor, 4, 2, fontSize)
+    plotPeersVS('lighthouse', lightPanda, 'TIME', 'NETOUT', 'TIME', 'Peers Connected', "Lighthouse Network Outgoing Traffic VS Chain Peers Connected", "Network Outgoing Traffic (GB)", "Peers Connected", lightColor, PeersColor , 4, 2, fontSize)
+    plotPeersVS('teku', tekuPanda, 'TIME', 'NETOUT', 'TIME', 'Peers Connected', "Teku Network Outgoing Traffic VS Chain Peers Connected", "Network Outgoing Traffic (GB)", "Peers Connected", tekuColor, PeersColor , 4, 2, fontSize)
+    plotPeersVS('nimbus', nimbusPanda, 'TIME', 'NETOUT', 'TIME', 'Peers Connected', "Nimbus Network Outgoing Traffic VS Peers Connected", "Network Outgoing Traffic (GB)", "Peers Connected" , NimbusColor, PeersColor, 4, 2, fontSize)
+    plotPeersVS('prysm', prysmPanda, 'TIME', 'NETOUT', 'TIME', 'Peers Connected', "Prysm Network Outgoing Traffic VS Peers Connected", "Network Outgoing Traffic (GB)", "Peers Connected" , PrysmColor, PeersColor, 4, 2, fontSize)
+    plotPeersVS('lodestar', lodestarPanda, 'TIME', 'NETOUT', 'TIME', 'Peers Connected', "Lodestar Network Outgoing Traffic VS Peers Connected", "Network Outgoing Traffic (GB)", "Peers Connected" , LodestarColor, PeersColor, 4, 2, fontSize)
     
     
     # Plot 5 client MEM on the same graph
     plotAllClientsOnly(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda, 
-              'TIME', 'MEM', "System Memory Usage. Comparison Between Clients", "System Memory Used (GB)", 4, fontSize)
+              'TIME', 'MEM', "System Memory Usage", "System Memory Used (GB)", 4, fontSize)
 
     
     # Plot 5 client CPU on the same graph
     plotAllClientsOnly(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda, 
-              'TIME', 'Current Slot', "CPU Usage. Comparison Between Clients", "CPU Usage (%)", 4, fontSize)
+              'TIME', 'CPU', "CPU Usage", "CPU Usage (%)", 4, fontSize)
     
     
     # Plot 5 client NETIN on the same graph
     plotAllClientsOnly(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda, 
-              'TIME', 'NETIN', "Network Incoming Traffic. Comparison Between Clients", "Network Incoming Traffic (GB)", 2, fontSize)
+              'TIME', 'NETIN', "Network Incoming Traffic", "Network Incoming Traffic (GB)", 2, fontSize)
     
     
     # Plot 5 client NETOUT on the same graph
     plotAllClientsOnly(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda, 
-              'TIME', 'NETOUT', "Network Outcoming Traffic. Comparison Between Clients", "Network Outcoming Traffic (GB)", 2, fontSize)
+              'TIME', 'NETOUT', "Network Outgoing Traffic", "Network Outgoing Traffic (GB)", 2, fontSize)
   
     
     # Plot 5 client DISK on the same graph
     plotAllClientsOnly(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda, 
-              'TIME', 'DISK', "Disk Usage. Comparison Between Clients", "Disk Usage (GB)", 2, fontSize)
+              'TIME', 'DISK', "Disk Usage", "Disk Usage (GB)", 2, fontSize)
     
     # Plot 5 client NETIN-PEERS on the same graph
     plotAllClients(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda, 
-              'TIME', 'NETIN', 'TIME', 'Peers Connected', "Network Incoming Traffic VS Peers Connected. Comparison Between Clients", "Network Incoming Traffic (GB)", "Peers Connected", 1, fontSize)
+              'TIME', 'NETIN', 'TIME', 'Peers Connected', "Network Incoming Traffic VS Peers Connected", "Network Incoming Traffic (GB)", "Peers Connected", 1, fontSize)
     
     # Plot 5 client NETOUT-PEERS on the same graph
     plotAllClients(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda, 
-              'TIME', 'NETOUT', 'TIME', 'Peers Connected', "Network Outcoming Traffic VS Peers Connected. Comparison Between Clients", "Network Outcoming Traffic (GB)Me", "Peers Connected", 1, fontSize)
+              'TIME', 'NETOUT', 'TIME', 'Peers Connected', "Network Outgoing Traffic VS Peers Connected", "Network Outgoing Traffic (GB)Me", "Peers Connected", 1, fontSize)
     
     
     # Plot 5 client PEERS on the same graph
-    plotAllClientsOnly(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda,'TIME', 'Peers Connected', "Peers Connected. Comparison Between Clients", "Peers Connected", 1, fontSize)
+    plotAllClientsOnly(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda,'TIME', 'Peers Connected', "Peers Connected", "Peers Connected", 1, fontSize)
     
     # Plot 5 client Sync on the same graph
-    plotAllClientsOnly(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda,'TIME', 'Current Slot', "Chain Synchronization. Comparison Between Clients", "Current Slot (thousands)", 4, fontSize)
+    plotAllClientsOnly(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda,'TIME', 'Current Slot', "Chain Synchronization", "Current Slot (thousands)", 4, fontSize)
     
     # Plot 5 client Sync on the same graph
-    plotAllClientsOnlyRange(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda,'TIME', 'Current Slot', 12, 150, "Chain Synchronization. Comparison Between Clients", "Current Slot (thousands)", 4, fontSize)
+    plotAllClientsOnlyRange(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda,'TIME', 'Current Slot', 12, 150, "Chain Synchronization", "Current Slot (thousands)","Disk Usage", 4, fontSize)
 
     # Plot 5 client DISK-SLOT (On X axis) on the same graph
-    plotAllClientsOnlySlot(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda, "Range", 'Current Slot', 'DISK',  "Disk Usage Based on Last Synced Slot. Comparison Between Clients", "Disk Usage (GB)", 1, fontSize)
-          
+    plotAllClientsOnlySlot(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda, "Range", 'Current Slot', 'DISK',  "Disk Usage Based on Last Synced Slot", "Disk Usage (GB)", 1, fontSize)
+    
+    # Plot 5 client Disk-SLOT on the same graph (Detail)
+    plotAllClientsOnlyRange(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda,'Current Slot', 'DISK', 400, 15, "Chain Synchronization", "Current Slot (thousands)","Disk Usage", 4, fontSize)
           
 def plotSyncVS(clientName, pandaClientMetrics, xMetrics, yMetrics, xSync, ySync, title, y1label, y2label, y1Color, y2Color, loc, ncol, size):
 
     outfile = '../../figures/metrics_plots/' + clientName + yMetrics + '-' + ySync+ '.png'
+    outfile = outfile.replace(' ', '_')
     figurePath =  Path(__file__).parent / outfile
     
     label1 = clientName + ' ' + yMetrics
@@ -463,12 +471,13 @@ def plotSyncVS(clientName, pandaClientMetrics, xMetrics, yMetrics, xSync, ySync,
     plt.title(title, fontsize = size)
     plt.tight_layout()
     plt.savefig(figurePath)
-    plt.show() 
+    #plt.show() 
 
     
 def plotPeersVS(clientName, pandaClientMetrics, xMetrics, yMetrics, xSync, ySync, title, y1label, y2label, y1Color, y2Color, loc, ncol, size):
     
     outfile = '../../figures/metrics_plots/' + clientName + yMetrics + '-' + ySync+ '.png'
+    outfile = outfile.replace(' ', '_')
     figurePath =  Path(__file__).parent / outfile
     
     label1 = clientName + ' ' + yMetrics
@@ -505,6 +514,7 @@ def plotPeersVS(clientName, pandaClientMetrics, xMetrics, yMetrics, xSync, ySync
 def plotCpuVS(clientName, pandaClientMetrics, xMetrics, yMetrics, xSync, ySync, title, y1label, y2label, y1Color, y2Color, loc, ncol, size):
         
     outfile = '../../figures/metrics_plots/' + clientName + yMetrics + '-' + ySync+ '.png'
+    outfile = outfile.replace(' ', '_')
     figurePath =  Path(__file__).parent / outfile
     
     label1 = clientName + ' ' + yMetrics
@@ -541,6 +551,7 @@ def plotCpuVS(clientName, pandaClientMetrics, xMetrics, yMetrics, xSync, ySync, 
 def plotAllClients(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics, yMetrics, xSync, ySync, title, y1label, y2label, loc, size):
         
     outfile = '../../figures/metrics_plots/' + 'Clients' + yMetrics + '-' + ySync+ '.png'
+    outfile = outfile.replace(' ', '_')
     figurePath =  Path(__file__).parent / outfile
     
     label1 = 'Lighthouse'
@@ -591,6 +602,7 @@ def plotAllClients(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics, yMetrics
 def plotSingleSerieOfPanda(panda, xMetrics, yMetrics, title, ylabel, xlabel, size):
     
     outfile = '../../figures/metrics_plots/' + 'Clients' + yMetrics + '.png'
+    outfile = outfile.replace(' ', '_')
     figurePath =  Path(__file__).parent / outfile
     
     label1 = 'Lighthouse' + ' ' + yMetrics
@@ -628,6 +640,7 @@ def plotSingleSerieOfPanda(panda, xMetrics, yMetrics, title, ylabel, xlabel, siz
 def plotAllClientsOnlySlot(light1, teku1, nimbus1, prysm1, lodestar1, sliceRange, xMetrics, yMetrics, title, ylabel, loc, size):
         
     outfile = '../../figures/metrics_plots/' + 'Clients' + yMetrics + xMetrics + '.png'
+    outfile = outfile.replace(' ', '_')
     figurePath =  Path(__file__).parent / outfile
     
     label1 = 'Lighthouse'
@@ -670,6 +683,7 @@ def plotAllClientsOnlySlot(light1, teku1, nimbus1, prysm1, lodestar1, sliceRange
 def plotAllClientsOnly(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics, yMetrics, title, y1label, loc, size):
         
     outfile = '../../figures/metrics_plots/' + 'Clients' + yMetrics + '.png'
+    outfile = outfile.replace(' ', '_')
     figurePath =  Path(__file__).parent / outfile
     
     label1 = 'Lighthouse'
@@ -680,18 +694,27 @@ def plotAllClientsOnly(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics, yMet
     
     fig = plt.figure(figsize=(10,6))
     ax1 = fig.add_subplot(111)
-    light1.plot(ax=ax1, x=xMetrics, y=yMetrics,  marker='.', markersize=0.05, label=label1)
-    teku1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.05, label=label2)
-    nimbus1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.05, label=label3)
-    prysm1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.05, label=label4)
-    lodestar1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.05, label=label5)
-
+    if yMetrics=='CPU':
+        light1.plot(ax=ax1, x=xMetrics, y=yMetrics, style='.',  marker='.', markersize=0.05, label=label1)
+        teku1.plot(ax=ax1, x=xMetrics, y=yMetrics, style='.', marker='.', markersize=0.05, label=label2)
+        nimbus1.plot(ax=ax1, x=xMetrics, y=yMetrics, style='.', marker='.', markersize=0.05, label=label3)
+        prysm1.plot(ax=ax1, x=xMetrics, y=yMetrics, style='.', marker='.', markersize=0.05, label=label4)
+        lodestar1.plot(ax=ax1, x=xMetrics, y=yMetrics, style='.', marker='.', markersize=0.05, label=label5)
+    else:
+        light1.plot(ax=ax1, x=xMetrics, y=yMetrics,  marker='.', markersize=0.05, label=label1)
+        teku1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.05, label=label2)
+        nimbus1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.05, label=label3)
+        prysm1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.05, label=label4)
+        lodestar1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.05, label=label5)
     ax1.set_ylabel(y1label, fontsize = size)
     ax1.set_ylim(bottom=0)
     ax1.tick_params(axis='y', labelsize = size)
     ax1.tick_params(axis='x', labelsize = size)
     #ax1.get_legend().remove()
-    l1 = ax1.legend(markerscale=10, loc=loc, ncol=1, prop={'size':size})
+    if yMetrics=='CPU':
+        ax1.legend(markerscale=150, loc=loc, ncol=1, prop={'size':size})
+    else:
+        l1 = ax1.legend(markerscale=10, loc=loc, ncol=1, prop={'size':size})
     
     #ax1.legend(handles=[l1, l2], title='Legend', bbox_to_anchor=(1.05, 1), loc='upper left', prop={'size':size})
     #bbox_to_anchor=(1,0), loc="lower right"
@@ -704,9 +727,10 @@ def plotAllClientsOnly(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics, yMet
     plt.savefig(figurePath)
     #plt.show()
 
-def plotAllClientsOnlyRange(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics, yMetrics, xLimit, yLimit, title, y1label, loc, size):
+def plotAllClientsOnlyRange(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics, yMetrics, xLimit, yLimit, title, x1label, y1label, loc, size):
         
     outfile = '../../figures/metrics_plots/' + 'Clients' + yMetrics + 'Ranged.png'
+    outfile = outfile.replace(' ', '_')
     figurePath =  Path(__file__).parent / outfile
     
     label1 = 'Lighthouse'
@@ -724,6 +748,7 @@ def plotAllClientsOnlyRange(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics,
     lodestar1.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.05, label=label5)
 
     ax1.set_ylabel(y1label, fontsize = size)
+    ax1.set_xlabel(x1label, fontsize = size)
     ax1.set_xbound(lower=0, upper=xLimit)
     ax1.set_xlim(emit=True, left=0, right=xLimit)
     ax1.set_ylim(bottom=0, top=yLimit)
@@ -736,12 +761,17 @@ def plotAllClientsOnlyRange(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics,
     #ax1.legend(handles=[l1, l2], title='Legend', bbox_to_anchor=(1.05, 1), loc='upper left', prop={'size':size})
     #bbox_to_anchor=(1,0), loc="lower right"
     
-    if (xMetrics == 'TIME' or xMetrics == 'Current Slot'):
+    if (yMetrics == 'Current Slot'):
     	ax1.axhline(y=73.349, color='r', linestyle='--')
     	ax1.axhline(y=117.944, color='r', linestyle='--')
-    
+
+
+    if (xMetrics == 'Current Slot'):
+    	ax1.axvline(x=73.349, color='r', linestyle='--')
+    	ax1.axvline(x=117.944, color='r', linestyle='--')
+        
     ax1.grid(which='major', axis='both', linestyle='--')
-    ax1.set_xlabel("Time of syncing (hours)", fontsize = size)
+    #ax1.set_xlabel("Time of syncing (hours)", fontsize = size)
     #ax1.xaxis.set_ticks(np.arange(0, prysm1[xMetrics].iloc[-1]+1, 6.0))
     plt.title(title, fontsize = size)
     plt.tight_layout()
