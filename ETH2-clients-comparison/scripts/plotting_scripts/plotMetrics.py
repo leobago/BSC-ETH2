@@ -357,6 +357,7 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodesta
     plotCpuVS('lighthouse', lightPanda, 'TIME', 'CPU', 'TIME', 'DISK', "Lighthouse CPU Usage VS Disk usage", "CPU Usage (%)", "Disk usage (GB)", lightColor, SyncColor, 2, 2, fontSize)
     plotCpuVS('teku', tekuPanda, 'TIME', 'CPU', 'TIME', 'DISK', "Teku CPU Usage VS Disk usage", "CPU Usage (%)", "Disk usage (GB)" , tekuColor, SyncColor, 4, 2, fontSize)
     plotCpuVS('nimbus', nimbusPanda, 'TIME', 'CPU', 'TIME', 'DISK', "Nimbus CPU Usage VS Disk usage", "CPU Usage (%)", "Disk usage (GB)", NimbusColor, SyncColor, 2, 2, fontSize)
+    plotCpuVSRange('nimbus', nimbusPanda, 'TIME', 'CPU', 'TIME', 'DISK', 9, 6, "Nimbus CPU Usage VS Disk usage", "CPU Usage (%)", "Disk usage (GB)", NimbusColor, SyncColor, 2, 2, fontSize)
     plotCpuVS('prysm', prysmPanda, 'TIME', 'CPU', 'TIME', 'DISK', "Prysm CPU Usage VS Disk usage", "CPU Usage (%)", "Disk usage (GB)" , PrysmColor, SyncColor, 2, 2, fontSize)
     plotCpuVS('lodestar', lodestarPanda, 'TIME', 'CPU', 'TIME', 'DISK', "Lodestar CPU Usage VS Disk usage", "CPU Usage (%)", "Disk usage (GB)", LodestarColor, SyncColor, 2, 2, fontSize)
     
@@ -435,7 +436,7 @@ def plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodesta
     plotAllClientsOnlySlot(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda, "Range", 'Current Slot', 'DISK',  "Disk Usage Based on Last Synced Slot", "Disk Usage (GB)", 1, fontSize)
     
     # Plot 5 client Disk-SLOT on the same graph (Detail)
-    plotAllClientsOnlyRange(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda,'Current Slot', 'DISK', 400, 15, "Chain Synchronization", "Current Slot (thousands)","Disk Usage", 4, fontSize)
+    plotAllClientsOnlyRange(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda,'Current Slot', 'DISK', 400, 12, "Chain Synchronization", "Current Slot (thousands)","Disk Usage", 1, fontSize)
           
 def plotSyncVS(clientName, pandaClientMetrics, xMetrics, yMetrics, xSync, ySync, title, y1label, y2label, y1Color, y2Color, loc, ncol, size):
 
@@ -468,6 +469,43 @@ def plotSyncVS(clientName, pandaClientMetrics, xMetrics, yMetrics, xSync, ySync,
     ax1.grid(which='major', axis='x', linestyle='--')
     ax1.set_xlabel("Time of syncing (hours)", fontsize = size)
     ax1.xaxis.set_ticks(np.arange(0, pandaClientMetrics[xSync].iloc[-1]+1, 6.0))
+    plt.title(title, fontsize = size)
+    plt.tight_layout()
+    plt.savefig(figurePath)
+    #plt.show() 
+    
+def plotSyncVSRange(clientName, pandaClientMetrics, xMetrics, yMetrics, xSync, ySync, xUpLimit, xLowLimit, title, y1label, y2label, y1Color, y2Color, loc, ncol, size):
+
+    outfile = '../../figures/metrics_plots/' + clientName + yMetrics + '-' + ySync+ 'Range.png'
+    outfile = outfile.replace(' ', '_')
+    figurePath =  Path(__file__).parent / outfile
+    
+    label1 = clientName + ' ' + yMetrics
+    label2 = clientName +  ' ' +ySync
+    
+    fig = plt.figure(figsize=(10,6))
+    ax1 = fig.add_subplot(111)
+    pandaClientMetrics.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.2, color=y1Color, label=label1)
+    ax12 = ax1.twinx()
+    pandaClientMetrics.plot(ax=ax12, x=xSync, y=ySync, marker='.', markersize=0.05, color=y2Color, label=label2)    
+    
+    ax1.set_ylabel(y1label, color=y1Color, fontsize = size)
+    ax1.set_ylim(bottom=0)
+    ax1.tick_params(axis='y', labelcolor=y1Color, labelsize = size)
+    ax1.tick_params(axis='x', labelsize = size)
+    ax1.get_legend().remove()
+    #ax1.legend(markerscale=10., loc=2, ncol=ncol, prop={'size':size})
+    
+    ax12.set_ylabel(y2label, color=y2Color, fontsize = size)
+    ax1.set_xlim(left=xLowLimit, right=xUpLimit)
+    ax1.set_ylim(bottom=0)
+    ax12.tick_params(axis='y', labelcolor=y2Color, labelsize = size)
+    ax12.get_legend().remove()
+    #ax12.legend(markerscale=30., loc=1, ncol=ncol, prop={'size':size})
+    
+    ax1.grid(which='major', axis='x', linestyle='--')
+    ax1.set_xlabel("Time of syncing (hours)", fontsize = size)
+    #ax1.xaxis.set_ticks(np.arange(0, pandaClientMetrics[xSync].iloc[-1]+1, 6.0))
     plt.title(title, fontsize = size)
     plt.tight_layout()
     plt.savefig(figurePath)
@@ -547,6 +585,43 @@ def plotCpuVS(clientName, pandaClientMetrics, xMetrics, yMetrics, xSync, ySync, 
     plt.tight_layout()
     plt.savefig(figurePath)
     #plt.show()
+    
+def plotCpuVSRange(clientName, pandaClientMetrics, xMetrics, yMetrics, xSync, ySync, xUpLimit, xLowLimit, title, y1label, y2label, y1Color, y2Color, loc, ncol, size):
+
+    outfile = '../../figures/metrics_plots/' + clientName + yMetrics + '-' + ySync+ 'Range.png'
+    outfile = outfile.replace(' ', '_')
+    figurePath =  Path(__file__).parent / outfile
+    
+    label1 = clientName + ' ' + yMetrics
+    label2 = clientName +  ' ' +ySync
+    
+    fig = plt.figure(figsize=(10,6))
+    ax1 = fig.add_subplot(111)
+    pandaClientMetrics.plot(ax=ax1, x=xMetrics, y=yMetrics,  style='.', marker='.', markersize=0.5, color=y1Color, label=label1)
+    ax12 = ax1.twinx()
+    pandaClientMetrics.plot(ax=ax12, x=xSync, y=ySync, marker='.', markersize=0.05, color=y2Color, label=label2)    
+    
+    ax1.set_ylabel(y1label, color=y1Color, fontsize = size)
+    ax1.set_ylim(bottom=0)
+    ax1.tick_params(axis='y', labelcolor=y1Color, labelsize = size)
+    ax1.tick_params(axis='x', labelsize = size)
+    ax1.get_legend().remove()
+    #ax1.legend(markerscale=10., loc=2, ncol=ncol, prop={'size':size})
+    
+    ax12.set_ylabel(y2label, color=y2Color, fontsize = size)
+    ax1.set_xlim(left=xLowLimit, right=xUpLimit)
+    ax1.set_ylim(bottom=0)
+    ax12.tick_params(axis='y', labelcolor=y2Color, labelsize = size)
+    ax12.get_legend().remove()
+    #ax12.legend(markerscale=30., loc=1, ncol=ncol, prop={'size':size})
+    
+    ax1.grid(which='major', axis='x', linestyle='--')
+    ax1.set_xlabel("Time of syncing (hours)", fontsize = size)
+    #ax1.xaxis.set_ticks(np.arange(0, pandaClientMetrics[xSync].iloc[-1]+1, 6.0))
+    plt.title(title, fontsize = size)
+    plt.tight_layout()
+    plt.savefig(figurePath)
+    #plt.show() 
     
 def plotAllClients(light1, teku1, nimbus1, prysm1, lodestar1, xMetrics, yMetrics, xSync, ySync, title, y1label, y2label, loc, size):
         
