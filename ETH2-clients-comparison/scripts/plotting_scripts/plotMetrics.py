@@ -95,14 +95,21 @@ def main ():
         prysmPanda = pd.read_csv(prysmFile)
         lodestarPanda = pd.read_csv(lodestarFile)
         
-    elif csvORlogs == 'teku':
-        teku1File = Path(__file__).parent / sys.argv[2]
-        teku2File = Path(__file__).parent / sys.argv[3]
+    elif csvORlogs == 'time-comparison':
+        client1File = Path(__file__).parent / sys.argv[2]
+        client1time   = sys.argv[3]
+        client1metric = sys.argv[4]
+        client2File = Path(__file__).parent / sys.argv[5]
+        client2time   = sys.argv[6]
+        client2metric = sys.argv[7]
+        clientName = sys.argv[8]
         
-        teku1Panda = pd.read_csv(teku1File) 
+        client1Panda = pd.read_csv(client1File) 
         print(sys.argv[2], 'Loaded!')
-        teku2Panda = pd.read_csv(teku2File)
+        print(client1Panda)
+        client2Panda = pd.read_csv(client2File)
         print(sys.argv[3], 'Loaded!')
+        
         
         
     else:
@@ -110,10 +117,10 @@ def main ():
         exit()
     
     # Plot
-    if csvORlogs != 'teku':
+    if csvORlogs != 'time-comparison':
         plotMetricsFromPanda(lightPanda, tekuPanda, nimbusPanda, prysmPanda, lodestarPanda)
     else: 
-        plotTeku1vsTeku2(teku1Panda, teku2Panda,  'Current Slot', 'DISK' , 'Disk Usage on Teku Syncing in Different Time Moments', 'Disk Usage (GB)', 'Last Synced Slot', 4, 20)
+        plotClient1VSClient2(clientName, client1Panda, client2Panda,  client1time, client2time, client1metric, client2metric, 0, 300, 0, 14 , 'Disk Usage on Syncing in Different Time Moments', 'Disk Usage (GB)', 'Last Synced Slot (thousands)', 4, 20)
     print("Script Done!")
     
     
@@ -247,21 +254,22 @@ def getMetricsFromFile(clientType, inputFile):
     metricsPanda = pd.DataFrame(data = clientMetrics, columns = ['TIME','MEM','CPU', 'NETOUT', 'NETIN', 'DISK'])
     return metricsPanda
 
-def plotTeku1vsTeku2(teku1, teku2, xMetrics, yMetrics, title, ylabel, xlabel, loc, size):
-    outfile = '../../figures/metrics_plots/' + 'teku' + yMetrics + '-' + xMetrics + 'Comparison.png'
+def plotClient1VSClient2(clientName, client1, client2, x1Metrics, x2Metrics, y1Metrics, y2Metrics, xlowlimit, xuplimit, ylowlimit, yuplimit, title, ylabel, xlabel, loc, size):
+    outfile = '../../figures/metrics_plots/' + clientName + y2Metrics + '-' + x2Metrics + 'Comparison.png'
     outfile = outfile.replace(' ', '_')
     figurePath =  Path(__file__).parent / outfile
     
-    label1 = 'Teku 1'
-    label2 = 'Teku 2'
+    label1 = clientName + '1'
+    label2 = clientName + '2'
     
     fig = plt.figure(figsize=(10,6))
     ax1 = fig.add_subplot(111)
-    teku1.plot(ax=ax1, x=xMetrics, y=yMetrics,  marker='.', markersize=0.05, label=label1)
-    teku2.plot(ax=ax1, x=xMetrics, y=yMetrics, marker='.', markersize=0.05, label=label2)
+    client1.plot(ax=ax1, x=x1Metrics, y=y1Metrics,  marker='.', markersize=0.05, label=label1)
+    client2.plot(ax=ax1, x=x2Metrics, y=y2Metrics, marker='.', markersize=0.05, label=label2)
 
     ax1.set_ylabel(ylabel, fontsize = size)
-    ax1.set_ylim(bottom=0)
+    ax1.set_xlim(left=xlowlimit, right=xuplimit)
+    ax1.set_ylim(bottom=ylowlimit, top=yuplimit)
     ax1.tick_params(axis='y', labelsize = size)
     ax1.tick_params(axis='x', labelsize = size)
     ax1.get_legend().remove()
