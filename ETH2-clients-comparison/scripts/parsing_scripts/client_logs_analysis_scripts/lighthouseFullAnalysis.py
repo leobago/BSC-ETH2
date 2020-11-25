@@ -237,7 +237,7 @@ def main():
         'tickSize': 16})
         
 	plotColumn(lightEventPanda, opts={
-		'figSize': (15,6),
+		'figSize': (11,6),
 		'figTitle': 'light-events-on-slot-zoomed.png',
 		'outputPath': outFolder,
 		'xlog': False,
@@ -250,7 +250,7 @@ def main():
 		'yLowLimit': 0,
 		'yRange': 1,
 		'yUpperLimit': None,
-		'title': "Lighthouse event's time-line while syncing",
+		'title': "Lighthouse events while syncing",
 		'xLabel': 'Last synced Slot (thousands)',
 		'yLabel': 'Events MSG',
 		'xTickLabel': None,
@@ -269,13 +269,13 @@ def main():
 		'vlineStyle': '--',
 		'marker': '.',
 		'markerStyle': '.',
-		'markerSize': 1.2,
+		'markerSize': 4,
 		'lengendPosition': 1,
 		'legendSize': 16,
 		'tickSize': 16})
         	
 	plotColumn(lightMetricsPanda, opts={
-        'figSize': (15,6),
+        'figSize': (12,6),
         'figTitle': 'light-Disk-on-slot-zoomed.png',
         'outputPath': outFolder,
         'xlog': False,
