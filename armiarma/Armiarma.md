@@ -1,4 +1,4 @@
- 
+' 
 # Armiarma Metrics on Ethereum2 Mainnet
 
 On the current evolution state of the Ethereum2 project, the beacon chain and the different clients have proved to be working as expected. It has already been a bit more than three months since the Ethereum2 mainnet was launched as the main event on the eth2 phase0, and it has become a pretty enriching experience for all. 
@@ -26,11 +26,11 @@ On a deeper analysis of the received metrics, this is part of the data we have b
 
 *NOTE: the data used for generating the following charts was gathered from the Armiarma crawler during 3 hours. The conclusions that can be obtained from this report might be biased by the short running time and the geographical location of the launched crawler.*
 
-![Figure 1. Comparison between the number of peers got from the dv5 and the ones connected to. ](./charts/PeerstoreVsPeers.png)
+![Figure 1. Comparison between the number of peers got from the dv5 and the ones connected to. ](./charts/PeerstoreVsConnectedPeers.png)
 
 ![Figure 2. Distribution of the error experienced while peering nodes of the peerstore.](./charts/DetectedErrorDistribution.png)
 
-![Figure 3. Client and Version distribution of the connected peers.](./charts/PeersPerClients.png)
+![Figure 3. Client and Version distribution of the connected peers.](./charts/PeersPerClient.png)
 
 ![Figure 4. Estimated client distribution in the network.](./charts/PeerstoreClientExtrapolation.png)
 
@@ -42,10 +42,9 @@ On a deeper analysis of the received metrics, this is part of the data we have b
 
 ![Figure 8. Total of messages received for the connected time to each of the peers.](./charts/TotalMessagesPerTimeConnected.png)
 
-![Figure 9. Average time connected to peers from the different clients.](./charts/AverageTotalTimeConnectedToClientPeers.png)
-*Note: The average was made from the total amount of time shown previously.*
+![Figure 9. Average time connected to peers from the different clients.](./charts/AverageOfConnectedTimePerClientType.png)
 
-![Figure 10. Received beacon blocks from each of the connected peers.](./charts/BeaconBlockMessagePerClient.png)
+![Figure 10. Received beacon blocks from each of the connected peers.](./charts/BeaconBlockMessagesPerClient.png)
 
 ![Figure 11. Evolution of the projected client distribution.](./charts/Client-Distribution.png)
 
