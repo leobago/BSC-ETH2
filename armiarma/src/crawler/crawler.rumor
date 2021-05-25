@@ -1,0 +1,85 @@
+external_ip="$(curl -s v4.ident.me)"
+p2p_port=9020
+
+# TODO: -Priv-key loader/checker needs to be implemented
+
+#fi IN PROCESS: priv-key will be given/readed from the launcher.rumor
+##privkeyfile="${metricsFolder}/priv_key.sh" 
+#
+#if [[ -d privkeyfile ]]
+#then 
+#    echo "Privkey Existed from before:"
+#    source privkeyfile
+#else 
+#    echo "No Privkey found, generating a new one"
+#    armiarma: enr gen-key
+#    priv_key="$__key"
+#    grab __key > privkeyfile
+
+#armiarma: enr gen-key
+#priv_key="$__key"
+priv_key="16dd72c556f51685d1cff89e759c5fda18adc4bc640a493a9e6b56c93af12941"
+echo "priv key = $priv_key"
+
+armiarma: include enr.rumor
+
+armiarma: include peerstore.rumor
+
+armiarma: include start_host.rumor
+
+# Provide enough time to copy the enr
+armiarma: sleep 2s
+
+armiarma: include peer_status_metadata.rumor
+
+armiarma: include drop_goodbyes.rumor
+
+armiarma: include polling.rumor
+
+# Now that we are able to generate a block DB and store
+# blocks from the gossipsub, we could serve the blocks
+armiarma: include sync_drop_serve.rumor
+
+armiarma: include gossip.rumor
+
+#armiarma: include import_from_gossip.rumor
+
+armiarma: sleep 2s
+
+armiarma: include dv5.rumor
+
+armiarma: include export_metrics.rumor
+
+#armiarma: include connectall.rumor
+armiarma: include random-connect.rumor
+
+#sleep 5m
+
+#armiarma: include serve_blocks.rumor
+
+error="$?"
+if [[ "$error" -ne "0" ]]
+then
+    echo " Error Launching random connector"
+    exit 1
+fi
+
+# Export the Host-Info
+
+#armiarma: include visualizer.rumor
+echo "$timeRange minutes"
+# Check if a given execution time has been given
+if [[ -z "$timeRange" ]]
+then
+	echo "No time has been assigned" 
+	# Generate and endless loop to keep the Rumor script alive
+	while :
+	do
+		echo "Press [CTRL+C] to stop.." 
+		sleep 15s
+	done
+else
+	echo "Running the crawler for $timeRange minutes" 
+	sleep "${timeRange}m"
+	exit 0
+fi
