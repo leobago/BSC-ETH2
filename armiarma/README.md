@@ -40,11 +40,11 @@ On a deeper analysis of the received metrics, this is part of the data we have b
 
 ![Figure 7. Experienced total connected time with the connected peers.](./charts/TimeConnectedWithPeers.png)
 
-![Figure 8. Total of messages received for the connected time to each of the peers.](./charts/TotalMessagesPerTimeConnected.png)
+![Figure 8. Total of messages received for the connected time to each of the peers.](./charts/TotalMesagesPerTimeConnected.png)
 
 ![Figure 9. Average time connected to peers from the different clients.](./charts/AverageOfConnectedTimePerClientType.png)
 
-![Figure 10. Received beacon blocks from each of the connected peers.](./charts/BeaconBlockMessagesPerClient.png)
+![Figure 10. Received beacon blocks from each of the connected peers.](./charts/BeaconBlockMessagePerClient.png)
 
 ![Figure 11. Evolution of the projected client distribution.](./charts/Client-Distribution.png)
 
