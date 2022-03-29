@@ -2,7 +2,7 @@ module github.com/libp2p/go-libp2p-pubsub
 
 require (
 	github.com/benbjohnson/clock v1.0.2
-	github.com/gogo/protobuf v1.3.1
+	github.com/gogo/protobuf v1.3.2
 	github.com/ipfs/go-log v1.0.4
 	github.com/libp2p/go-eventbus v0.2.1 // indirect
 	github.com/libp2p/go-libp2p-blankhost v0.1.6
@@ -16,8 +16,6 @@ require (
 	github.com/multiformats/go-multistream v0.1.1
 	github.com/whyrusleeping/timecache v0.0.0-20160911033111-cfcb2f1abfee
 	go.uber.org/zap v1.15.0 // indirect
-	golang.org/x/crypto v0.0.0-20200510223506-06a226fb4e37 // indirect
-	golang.org/x/sys v0.0.0-20200509044756-6aff5f38e54f // indirect
 )
 
 go 1.13
